@@ -11,7 +11,8 @@
 class Solution:
     def findContentChildren(self, g, s) -> int:
         # 贪心算法
-        # 局部最优就是小饼干喂给胃口小的,充分利用饼干尺寸喂饱一个,全局最优就是喂饱尽可能多的小孩。
+        # 局部最优：小饼干喂给胃口小的,充分利用饼干尺寸喂饱一个
+        # 全局最优：喂饱尽可能多的小孩。
         g.sort()
         s.sort()
         index = 0
@@ -19,7 +20,6 @@ class Solution:
             if index < len(g) and g[index] <= s[i]:
                 index += 1
         return index
-
 
 if __name__ == '__main__':
     # case1  res = 1

@@ -11,7 +11,7 @@
 class Solution:
     def combinationSum4(self, nums, target: int) -> int:
         # 动态规划
-        # 完全背包-组合问题-排列问题
+        # 完全背包-组合-排列
         # dp[i]: 对于给定的由正整数组成且不存在重复数字的数组，和为 i 的组合的个数。
         if not nums or target <= 0:
             return 0
