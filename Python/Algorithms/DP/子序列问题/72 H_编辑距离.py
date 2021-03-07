@@ -77,20 +77,20 @@ if __name__ == '__main__':
     # horse -> rorse (将 'h' 替换为 'r')
     # rorse -> rose (删除 'r')
     # rose -> ros (删除 'e')
-    word1 = "horse"
-    word2 = "ros"
+    word1_1 = "horse"
+    word2_1 = "ros"
 
-    # # case2  res = 5
-    # # intention -> inention (删除 't')
-    # # inention -> enention (将 'i' 替换为 'e')
-    # # enention -> exention (将 'n' 替换为 'x')
-    # # exention -> exection (将 'n' 替换为 'c')
-    # # exection -> execution (插入 'u')
-    # word1 = "intention"
-    # word2 = "execution"
+    # case2  res = 5
+    # intention -> inention (删除 't')
+    # inention -> enention (将 'i' 替换为 'e')
+    # enention -> exention (将 'n' 替换为 'x')
+    # exention -> exection (将 'n' 替换为 'c')
+    # exection -> execution (插入 'u')
+    word1_2 = "intention"
+    word2_2 = "execution"
 
     sol = Solution()
-    res1 = sol.minDistance1(word1, word2)
-    res2 = sol.minDistance2(word1, word2)
-    res3 = sol.minDistance3(word1, word2)
-    print(res1, res2, res3)
+    res1 = sol.minDistance1(word1_1, word2_1), sol.minDistance2(word1_1, word2_1), sol.minDistance3(word1_1, word2_1)
+    res2 = sol.minDistance1(word1_2, word2_2), sol.minDistance2(word1_2, word2_2), sol.minDistance3(word1_2, word2_2)
+    print('case1:', res1)
+    print('case2:', res2)

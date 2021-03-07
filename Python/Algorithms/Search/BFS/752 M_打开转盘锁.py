@@ -15,14 +15,14 @@ class Solution:
         # 单向BFS
         deadends = set(deadends)
         if target in deadends: return -1
-        cout = 0
+        count = 0
         deque = collections.deque(['0000'])
         visited = {'0000'}
         while deque:
             for _ in range(len(deque)):
                 cur = deque.popleft()
                 if cur in deadends: continue
-                if cur == target: return cout
+                if cur == target: return count
                 for i in range(4):
                     new_plus = self.plusOne(cur, i)
                     if new_plus not in visited:
@@ -32,21 +32,21 @@ class Solution:
                     if new_minus not in visited:
                         deque.append(new_minus)
                         visited.add(new_minus)
-            cout += 1
+            count += 1
         return -1
 
     def openLock2(self, deadends, target):
         # 双向BFS
         deadends = set(deadends)
         fore, back, visited = {'0000'}, {target}, set()  # 创建空集合一定要用set()而不是{}，因为后者用来创建空字典
-        cout = 0
+        count = 0
         while fore and back:
-            temp = set()  # 由于元素添加到集合是乱序的，因此需要临时temp存下一层节点
             if len(fore) > len(back):  # 如果前方向和后方向长度不同，取短的那个方向进行BFS，可以遍历更少节点，更快的两方向相遇返回结果
                 fore, back = back, fore
+            temp = set()  # 临时temp存下一层节点
             for cur in fore:
                 if cur in deadends: continue
-                if cur in back: return cout  # 表示双向BFS相遇了，返回最终结果
+                if cur in back: return count  # 表示双向BFS相遇了，返回最终结果
                 visited.add(cur)  # 不是用队列去添加下一层，然后直接遍历队列；而是直接遍历集合，所以遍历一个元素添加一个元素到查重集
                 for i in range(4):
                     new_plus = self.plusOne(cur, i)
@@ -55,11 +55,8 @@ class Solution:
                     new_minus = self.minusOne(cur, i)
                     if new_minus not in visited:
                         temp.add(new_minus)
-            cout += 1
-            # fore = back  # 交换方向进行BFS
-            # back = temp
-            fore, back = back, temp
-
+            count += 1
+            fore = temp  # 此时的temp层是相对于fore的下一层
         return -1
 
     def plusOne(self, s, idx):

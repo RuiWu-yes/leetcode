@@ -68,19 +68,21 @@ class Solution:
 
 if __name__ == '__main__':
     # case1  res = "BANC"
-    s = "ADOBECODEBANC"
-    t = "ABC"
+    s1 = "ADOBECODEBANC"
+    t1 = "ABC"
 
-    # # case2  res = "a"
-    # s = "a"
-    # t = "a"
+    # case2  res = "a"
+    s2 = "a"
+    t2 = "a"
 
-    # # case3  res = ""
-    # s = 'a'
-    # t = 'aa'
+    # case3  res = ""
+    s3 = 'a'
+    t3 = 'aa'
 
     sol = Solution()
-    res1 = sol.minWindow1(s, t)
-    res2 = sol.minWindow2(s, t)
+    res1 = sol.minWindow1(s1, t1), sol.minWindow2(s1, t1)
+    res2 = sol.minWindow1(s2, t2), sol.minWindow2(s2, t2)
+    res3 = sol.minWindow1(s3, t3), sol.minWindow2(s3, t3)
     print(res1)
     print(res2)
+    print(res3)

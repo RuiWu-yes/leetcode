@@ -23,6 +23,7 @@ class Solution:
 
     def maxDepth2(self, root: TreeNode) -> int:
         # 迭代法
+        # 层序遍历
         if not root: return 0
         depth = 0
         queue = [root]

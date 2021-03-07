@@ -20,6 +20,7 @@ class Solution:
 
     def isMatch2(self, s: str, p: str) -> bool:
         # 动态规划:带备忘录的递归解法
+        # 使用两个变量 i, j 记录当前匹配到的位置，从而避免使用子字符串切片，并且将 i, j 存入备忘录，避免重复计算即可
         memo = dict()  # 备忘录
         def dp(i, j):
             if (i, j) in memo: return memo[(i, j)]

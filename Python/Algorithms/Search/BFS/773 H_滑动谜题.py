@@ -10,6 +10,7 @@
 
 class Solution:
     def slidingPuzzle(self, board) -> int:
+        # BFS
         m , n = 2, 3
         start = ''
         target = '123450'

@@ -17,15 +17,25 @@ class Solution:
         return [-1, -1]
 
     def twoSum2(self, nums, target: int):
-        # 哈希算法：
-        hashmap = {}
+        # 两遍哈希
+        dic = {}
         for i in range(len(nums)):
-            hashmap[nums[i]] = i
+            dic[nums[i]] = i
         for i in range(len(nums)):
             val = target - nums[i]
-            if val in hashmap and hashmap[val] != i:
-                return [i, hashmap[val]]
+            if val in dic and dic[val] != i:
+                return [i, dic[val]]
         return [-1, -1]
+
+    def twoSum3(self, nums, target: int):
+        # 一遍哈希
+        dic = {}
+        for i in range(len(nums)):
+            temp = target - nums[i]
+            if temp in dic:
+                return [dic.get(temp), i]
+            else:
+                dic[nums[i]] = i
 
 
 if __name__ == '__main__':

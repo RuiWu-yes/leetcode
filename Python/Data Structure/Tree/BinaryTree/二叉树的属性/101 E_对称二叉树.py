@@ -14,9 +14,21 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    # 正是因为要遍历两棵树而且要比较内侧和外侧节点，所以准确的来说是一个树的遍历顺序是左右中，一个树的遍历顺序是右左中
+    # 正是因为要遍历两棵树而且要比较内侧和外侧节点，所以准确的来说是一个树的遍历顺序是左右根，一个树的遍历顺序是右左根
     # 后序也可以理解为是一种回溯
     def isSymmetric1(self, root: TreeNode) -> bool:
+        # 递归法
+        if not root: return True
+        def compare(left, right):
+            if not left and right: return False
+            elif left and not right: return False
+            elif not left and not right: return True
+            elif left.val != right.val: return False
+            else:
+                return compare(left.left, right.right) and compare(left.right, right.left)
+        return compare(root.left, root.right)
+
+    def isSymmetric2(self, root: TreeNode) -> bool:
         # 迭代法(使用队列)
         if not root: return True
         queue = collections.deque([root.left, root.right])
@@ -34,7 +46,7 @@ class Solution:
             queue.append(rightNode.left)   # 加入右节点左孩子
         return True
 
-    def isSymmetric2(self, root: TreeNode) -> bool:
+    def isSymmetric3(self, root: TreeNode) -> bool:
         # 迭代法(使用栈)
         if not root: return True
         stack = [root.left, root.right]
@@ -50,18 +62,6 @@ class Solution:
             stack.append(leftNode.right)  # 加入左节点右孩子
             stack.append(rightNode.left)  # 加入右节点左孩子
         return True
-
-    def isSymmetric3(self, root: TreeNode) -> bool:
-        # 递归法
-        if not root: return True
-        def compare(left, right):
-            if not left and right: return False
-            elif left and not right: return False
-            elif not left and not right: return True
-            elif left.val != right.val: return False
-            else:
-                return compare(left.left, right.right) and compare(left.right, right.left)
-        return compare(root.left, root.right)
 
 
 if __name__ == '__main__':

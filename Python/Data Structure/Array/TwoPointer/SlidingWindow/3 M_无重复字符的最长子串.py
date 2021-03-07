@@ -2,7 +2,7 @@
 # @Author  : ruiwu
 # @Email   : ryanwoo@zju.edu.cn
 # @Title   : 3 无重复字符的最长子串
-# @Content : 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+# @Content : 给定一个字符串，请你找出其中不含有重复字符的 最长子串和子序列问题 的长度。
 from collections import defaultdict
 
 

@@ -43,20 +43,23 @@ class Solution:
 if __name__ == '__main__':
     # case1  res = 3
     # 最长公共子序列是 "ace",它的长度为 3.
-    text1 = "abcde"
-    text2 = "ace"
+    text1_1 = "abcde"
+    text2_1 = "ace"
 
-    # # case2  res = 3
-    # # 最长公共子序列是 "abc",它的长度为 3.
-    # text1 = "abc"
-    # text2 = "abc"
+    # case2  res = 3
+    # 最长公共子序列是 "abc",它的长度为 3.
+    text1_2 = "abc"
+    text2_2 = "abc"
 
-    # # case3  res = 0
-    # # 两个字符串没有公共子序列,返回 0.
-    # text1 = "abc"
-    # text2 = "def"
+    # case3  res = 0
+    # 两个字符串没有公共子序列,返回 0.
+    text1_3 = "abc"
+    text2_3 = "def"
 
     sol = Solution()
-    res1 = sol.longestCommonSubsequence1(text1, text2)
-    res2 = sol.longestCommonSubsequence2(text1, text2)
-    print(res1, res2)
+    res1 = sol.longestCommonSubsequence1(text1_1, text2_1), sol.longestCommonSubsequence2(text1_1, text2_1)
+    res2 = sol.longestCommonSubsequence1(text1_2, text2_2), sol.longestCommonSubsequence2(text1_2, text2_2)
+    res3 = sol.longestCommonSubsequence1(text1_3, text2_3), sol.longestCommonSubsequence2(text1_3, text2_3)
+    print('case1:', res1)
+    print('case2:', res2)
+    print('case3:', res3)

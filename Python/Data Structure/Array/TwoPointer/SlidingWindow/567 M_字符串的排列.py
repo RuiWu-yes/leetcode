@@ -37,14 +37,16 @@ class Solution:
 
 
 if __name__ == '__main__':
-    # # case1  res = True
-    # s1 = "ab"
-    # s2 = "eidbaooo"
+    # case1  res = True
+    s1_1 = "ab"
+    s2_1 = "eidbaooo"
 
     # case2  res = False
-    s1 = "ab"
-    s2 = "eidboaoo"
+    s1_2 = "ab"
+    s2_2 = "eidboaoo"
 
     sol = Solution()
-    res = sol.checkInclusion(s1, s2)
-    print(res)
+    res1 = sol.checkInclusion(s1_1, s2_1)
+    res2 = sol.checkInclusion(s1_2, s2_2)
+    print('case1:', res1)
+    print('case2:', res2)

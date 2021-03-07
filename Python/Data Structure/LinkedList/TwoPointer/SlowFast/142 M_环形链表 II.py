@@ -15,7 +15,7 @@ class ListNode:
         self.next = None
 
 class Solution:
-    def detectCycle(self, head: ListNode):
+    def detectCycle1(self, head: ListNode):
         fast = slow = head
         while fast and fast.next:
             fast = fast.next.next
@@ -29,6 +29,14 @@ class Solution:
             fast = fast.next
             slow = slow.next
         return slow
+
+    def detectCycle2(self, head: ListNode):
+        s = {None}
+        while head not in s:
+            s.add(head)
+            head = head.next
+        return head
+
 
 if __name__ == '__main__':
     from libs import linked_list as ll
@@ -49,9 +57,9 @@ if __name__ == '__main__':
     head3 = ListNode(1)
 
     sol = Solution()
-    res1 = sol.detectCycle(head1)
-    res2 = sol.detectCycle(head2)
-    res3 = sol.detectCycle(head3)
-    print('case1:', res1.val if res1 else None)
-    print('case2:', res2.val if res2 else None)
-    print('case3:', res3.val if res3 else None)
+    res1_1, res1_2 = sol.detectCycle1(head1), sol.detectCycle2(head1)
+    res2_1, res2_2 = sol.detectCycle1(head2), sol.detectCycle2(head2)
+    res3_1, res3_2 = sol.detectCycle1(head3), sol.detectCycle2(head3)
+    print('case1:', res1_1.val if res1_1 else None, res1_2.val if res1_2 else None)
+    print('case2:', res2_1.val if res2_1 else None, res2_2.val if res2_2 else None)
+    print('case3:', res3_1.val if res3_1 else None, res3_2.val if res3_2 else None)

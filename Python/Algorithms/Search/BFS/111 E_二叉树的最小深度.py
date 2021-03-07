@@ -37,11 +37,11 @@ class Solution:
 if __name__ == '__main__':
     from libs.list2tree import ListCreateTree
 
-    # case1  res = 2
     Tree = ListCreateTree()
-    list = [3, 9, 20, None, None, 15, 7]
-    root = Tree.lct(None, list, 0)
+    # case1  res = 2
+    list1 = [3, 9, 20, None, None, 15, 7]
+    root1 = Tree.lct(None, list1, 0)
 
     sol = Solution()
-    res = sol.minDepth(root)
-    print('case1:', res)
+    res1 = sol.minDepth(root1)
+    print('case1:', res1)

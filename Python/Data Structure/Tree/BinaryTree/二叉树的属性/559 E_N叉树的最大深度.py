@@ -24,6 +24,7 @@ class Solution:
 
     def maxDepth2(self, root: 'Node') -> int:
         # 迭代法
+        # 层序遍历
         if not root: return 0
         queue = [root]
         depth = 0

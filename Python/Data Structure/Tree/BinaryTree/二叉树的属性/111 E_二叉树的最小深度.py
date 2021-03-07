@@ -17,14 +17,15 @@ class Solution:
     def minDepth1(self, root: TreeNode) -> int:
         # 递归法
         if not root: return 0
-        if not root.left and root.right:
+        if not root.left and root.right:  # 碰到叶子节点
             return self.minDepth1(root.right) + 1
-        if root.left and not root.right:
+        if root.left and not root.right:  # 碰到叶子节点
             return self.minDepth1(root.left) + 1
         return min(self.minDepth1(root.left), self.minDepth1(root.right)) + 1
 
     def minDepth2(self, root: TreeNode) -> int:
         # 迭代法
+        # 层序遍历: 当某一层出现无左右孩子的节点时，此层的深度即为最小深度
         if not root: return 0
         depth = 0
         queue = [root]

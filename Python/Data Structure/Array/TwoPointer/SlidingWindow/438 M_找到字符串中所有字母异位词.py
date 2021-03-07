@@ -12,6 +12,7 @@ from collections import Counter
 
 class Solution:
     def findAnagrams(self, s: str, p: str):
+        # 滑动窗口
         res = []
         need, window = Counter(p), defaultdict(lambda: 0)
         left, right, valid = 0, 0, 0
@@ -39,21 +40,25 @@ if __name__ == '__main__':
     # 解释:
     #     起始索引等于 0 的子串是 "cba", 它是 "abc" 的字母异位词.
     #     起始索引等于 6 的子串是 "bac", 它是 "abc" 的字母异位词.
-    s = "cbaebabacd"
-    p = "abc"
+    s1 = "cbaebabacd"
+    p1 = "abc"
 
-    # # case2  res = [0, 1, 2]
-    # # 解释:
-    # #     起始索引等于 0 的子串是 "ab", 它是 "ab" 的字母异位词.
-    # #     起始索引等于 1 的子串是 "ba", 它是 "ab" 的字母异位词.
-    # #     起始索引等于 2 的子串是 "ab", 它是 "ab" 的字母异位词.
-    # s = "abab"
-    # p = "ab"
+    # case2  res = [0, 1, 2]
+    # 解释:
+    #     起始索引等于 0 的子串是 "ab", 它是 "ab" 的字母异位词.
+    #     起始索引等于 1 的子串是 "ba", 它是 "ab" 的字母异位词.
+    #     起始索引等于 2 的子串是 "ab", 它是 "ab" 的字母异位词.
+    s2 = "abab"
+    p2 = "ab"
 
-    # # case3  res = [1]
-    # s = "baa"
-    # p = "aa"
+    # case3  res = [1]
+    s3 = "baa"
+    p3 = "aa"
 
     sol = Solution()
-    res = sol.findAnagrams(s, p)
-    print(res)
+    res1 = sol.findAnagrams(s1, p1)
+    res2 = sol.findAnagrams(s2, p2)
+    res3 = sol.findAnagrams(s3, p3)
+    print('case1:', res1)
+    print('case2:', res2)
+    print('case3:', res3)
