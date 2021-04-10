@@ -10,7 +10,19 @@
 
 
 class Solution:
-    def reverseStr(self, s: str, k: int) -> str:
+    def reverseStr1(self, s: str, k: int) -> str:
+        # 双指针法
+        ls = list(s)
+        for i in range(0, len(ls), 2 * k):
+            left = i
+            right = min(left + k - 1, len(ls) - 1)
+            while left < right:
+                ls[right], ls[left] = ls[left], ls[right]
+                left += 1
+                right -= 1
+        return ''.join(ls)
+
+    def reverseStr2(self, s: str, k: int) -> str:
         # 切片法
         res = ''
         for i in range(0, len(s), 2*k):
@@ -24,5 +36,5 @@ if __name__ == '__main__':
     k1 = 2
 
     sol = Solution()
-    res1 = sol.reverseStr(s1, k1)
+    res1 = sol.reverseStr1(s1, k1), sol.reverseStr2(s1, k1)
     print('case1:', res1)

@@ -14,7 +14,7 @@ class Solution:
     def lengthOfLastWord2(self, s: str) -> int:
         end = len(s) - 1
         if end < 0: return 0
-        while end >= 0 and s[end] == ' ':
+        while end >= 0 and s[end] == ' ':  # 最后一个字符是空的情况
             end -= 1
         start = end
         while start >= 0 and s[start] != ' ':
@@ -26,11 +26,16 @@ if __name__ == '__main__':
     # case1  res = 5
     s1 = "Hello World"
 
+    # case2  res = 1
+    s2 = "a "
+
     # case2  res = 0
-    s2 = " "
+    s3 = " "
 
     sol = Solution()
     res1 = sol.lengthOfLastWord1(s1), sol.lengthOfLastWord2(s1)
     res2 = sol.lengthOfLastWord1(s2), sol.lengthOfLastWord2(s2)
+    res3 = sol.lengthOfLastWord1(s3), sol.lengthOfLastWord2(s3)
     print('case1:', res1)
     print('case2:', res2)
+    print('case3:', res3)

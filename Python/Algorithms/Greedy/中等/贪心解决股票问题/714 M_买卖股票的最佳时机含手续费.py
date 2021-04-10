@@ -10,13 +10,40 @@
 
 class Solution:
     def maxProfit1(self, prices, fee: int) -> int:
+        # 动态规划
+        # dp[i][0/1]的定义：在第 i 天，手上没有持有(0)或者持有(1)股票，所能获取的最大利润
+        #    dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+        #    dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)
+        #    解释：相当于买入股票的价格升高了。
+        #         在第一个式子里减也是一样的，相当于卖出股票的价格减小了。
+        if not prices: return 0
+        n = len(prices)
+        dp = [[0]*2 for _ in range(n)]
+        for i in range(n):
+            if i - 1 == -1:
+                dp[0][0], dp[0][1] = 0, -prices[0] - fee
+                continue
+            dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+            dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)
+        return dp[n-1][0]
+
+    def maxProfit2(self, prices, fee: int) -> int:
+        # 动态规划:状态压缩
+        if not prices: return 0
+        n = len(prices)
+        dp_i_0, dp_i_1 = 0, -prices[0] - fee
+        for i in range(n):
+            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+            dp_i_1 = max(dp_i_1, dp_i_0 - prices[i] - fee)
+        return dp_i_0
+
+    def maxProfit3(self, prices, fee: int) -> int:
         # 贪心算法
         # 如果使用贪心策略，就是最低值买，最高值（如果算上手续费还盈利）就卖。
         # 此时无非就是要找到两个点，买入日期和卖出日期。
         #     买入日期：其实很好想，遇到更低点就记录一下。
         #     卖出日期：这个就不好算了，但也没有必要算出准确的卖出日期，只要当前价格大于（最低价格+手续费），就可以收获利润，
         #             至于准确的卖出日期，就是连续收获利润区间里的最后一天（并不需要计算是具体哪一天）。
-        #
         # 所以我们在做收获利润操作的时候其实有三种情况：
         #     情况一：收获利润的这一天并不是收获利润区间里的最后一天（不是真正的卖出，相当于持有股票），所以后面要继续收获利润。
         #     情况二：前一天是收获利润区间里的最后一天（相当于真正的卖出了），今天要重新记录最小价格了。
@@ -36,20 +63,6 @@ class Solution:
                 minPrice = prices[i] - fee  # 情况一，这一步很关键
         return res
 
-    def maxProfit2(self, prices, fee: int) -> int:
-        # 动态规划
-        #    dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
-        #    dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)
-        #    解释：相当于买入股票的价格升高了。
-        #         在第一个式子里减也是一样的，相当于卖出股票的价格减小了。
-        if not prices: return 0
-        n = len(prices)
-        dp_i_0, dp_i_1 = 0, float('-inf')
-        for i in range(n):
-            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
-            dp_i_1 = max(dp_i_1, dp_i_0 - prices[i] - fee)
-        return dp_i_0
-
 
 if __name__ == '__main__':
     # case1  res = 8
@@ -63,5 +76,5 @@ if __name__ == '__main__':
     fee = 2
 
     sol = Solution()
-    res1, res2 = sol.maxProfit1(prices, fee), sol.maxProfit2(prices, fee)
-    print('case1:', res1, res2)
+    res1 = sol.maxProfit1(prices, fee), sol.maxProfit2(prices, fee), sol.maxProfit3(prices, fee)
+    print('case1:', res1)

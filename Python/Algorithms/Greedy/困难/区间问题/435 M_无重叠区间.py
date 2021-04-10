@@ -38,7 +38,6 @@ if __name__ == '__main__':
     # 解释: 你不需要移除任何区间，因为它们已经是无重叠的了。
     intervals3 = [[1, 2], [2, 3]]
 
-
     sol = Solution()
     res1 = sol.eraseOverlapIntervals(intervals1)
     res2 = sol.eraseOverlapIntervals(intervals2)

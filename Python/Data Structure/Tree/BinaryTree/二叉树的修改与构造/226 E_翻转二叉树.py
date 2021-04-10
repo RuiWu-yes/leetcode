@@ -43,7 +43,7 @@ class Solution:
         queue = [root]
         while queue:
             node = queue.pop(0)
-            if node.left or node.right:
+            if node.left or node.right:  # 只要有一个不是None， 就交换
                 node.left, node.right = node.right, node.left
                 if node.left:
                     queue.append(node.left)

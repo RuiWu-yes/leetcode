@@ -11,7 +11,7 @@ class Solution:
         return " ".join([i[::-1] for i in s.split()])
 
     def reverseWords2(self, s: str) -> str:
-        # 利用栈
+        # 利用栈(先入后出)
         s = s + " "
         stack, res = [], ""
         for i in s:

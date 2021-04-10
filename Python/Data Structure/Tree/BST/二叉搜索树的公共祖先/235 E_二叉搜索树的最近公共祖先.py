@@ -18,6 +18,9 @@ class TreeNode:
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         # 递归法
+        # 二叉搜索树是有序的,那得好好利用一下这个特点。
+        # 在有序树里,如果判断一个节点的左子树里有p,右子树里有q呢?
+        # 其实只要从上到下遍历的时候,cur节点是数值在[p, q]区间中则说明该节点cur就是最近公共祖先了。
         if root.val > p.val and root.val > q.val:
             return self.lowestCommonAncestor(root.left, p, q)
         elif root.val < p.val and root.val < q.val:

@@ -12,7 +12,7 @@ class Solution:
     def toLowerCase2(self, str: str) -> str:
         ls = list(str)
         for i in range(len(ls)):
-            if 65 <= ord(ls[i]) <= 90:
+            if 65 <= ord(ls[i]) <= 90:  # ASCII(A-Z: 65-90  a-z: 97-122)
                 ls[i] = chr(ord(ls[i]) + 32)
         return "".join(ls)
 

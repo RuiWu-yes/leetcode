@@ -37,6 +37,6 @@ if __name__ == '__main__':
     val = 5
 
     sol = Solution()
-    res = sol.insertIntoBST(root, val)
-    result = BinaryTree().inorder(res)
-    print(result)
+    node = sol.insertIntoBST(root, val)
+    res = BinaryTree().inorder(node)
+    print(res)

@@ -20,19 +20,19 @@ class Solution:
         # 递归法
         if not root: return True
         def compare(left, right):
-            if not left and right: return False
-            elif left and not right: return False
-            elif not left and not right: return True
-            elif left.val != right.val: return False
+            if not left and right: return False       # 情况一：左节点为空，右节点不为空 --> False
+            elif left and not right: return False     # 情况二：左节点不为空，右节点为空 --> False
+            elif not left and not right: return True  # 情况三：左节点和右节点都为空 --> True
+            elif left.val != right.val: return False  # 情况四：左节点和右节点都不为空，但它们的值不相同 --> False
             else:
-                return compare(left.left, right.right) and compare(left.right, right.left)
+                return compare(left.left, right.right) and compare(left.right, right.left)  # 递归到下一层去比较
         return compare(root.left, root.right)
 
     def isSymmetric2(self, root: TreeNode) -> bool:
         # 迭代法(使用队列)
         if not root: return True
         queue = collections.deque([root.left, root.right])
-        while queue:  # 接下来就要判断这这两个树是否相互翻转
+        while queue:  # 接下来就要判断这两个树是否相互翻转一致
             leftNode = queue.popleft()
             rightNode = queue.popleft()
             if not leftNode and not rightNode:  # 左节点为空、右节点为空，此时说明是对称的
@@ -57,10 +57,10 @@ class Solution:
                 continue
             if not leftNode or not rightNode or leftNode.val != rightNode.val:
                 return False
-            stack.append(leftNode.left)  # 加入左节点左孩子
+            stack.append(leftNode.left)    # 加入左节点左孩子
             stack.append(rightNode.right)  # 加入右节点右孩子
-            stack.append(leftNode.right)  # 加入左节点右孩子
-            stack.append(rightNode.left)  # 加入右节点左孩子
+            stack.append(leftNode.right)   # 加入左节点右孩子
+            stack.append(rightNode.left)   # 加入右节点左孩子
         return True
 
 

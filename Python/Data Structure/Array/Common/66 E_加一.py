@@ -10,7 +10,16 @@ from typing import List
 
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        pass
+        # 情况一：数组中末尾不为9，直接末尾+=1
+        # 情况二：数组中末尾为9，遍历从低位到高位，只要碰到9就变成0，当碰到第一个不为9的数就+=1然后return
+        for i in range(len(digits)-1, -1, -1):
+            if digits[i] != 9:
+                digits[i] += 1
+                return digits
+            digits[i] = 0
+        digits[0] = 1
+        digits.append(0)
+        return digits
 
 
 if __name__ == '__main__':

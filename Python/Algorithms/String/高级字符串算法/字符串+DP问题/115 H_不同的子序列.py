@@ -11,12 +11,22 @@
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
         # 动态规划
-        # dp[i][j] 代表 T 前 i 字符串可以由 S j 字符串组成最多个数.
+        # dp[i][j]的定义： t(从 0 ~ i 字符串切片)在 s(从 0 ~ j 字符串切片)的子序列中出现的个数
         # 动态转移方程:
-        #     当 S[j] == T[i] , dp[i][j] = dp[i-1][j-1] + dp[i][j-1]
-        #     当 S[j] != T[i] , dp[i][j] = dp[i][j-1]
+        #     对于第一行, t 为空,因为空集是所有字符串子集, 所以我们第一行都是 1
+        #     对于第一列, s 为空,这样组成 t 个数当然为 0 了
+        # 至于动态转移方程怎么得到,可以根据初始状态下的状态数组，去推理一下!
+        #     当 s[j] == t[i] , dp[i][j] = dp[i-1][j-1] + dp[i][j-1]
+        #     当 s[j] != t[i] , dp[i][j] = dp[i][j-1]
+        # 比如：
+        #       '' r o o b
+        #    ''  1 1 1 1 1
+        #     r  0 1 1 1 1
+        #     o  0 0 1 2 2
+        #     b  0 0 0 0 2
         m, n = len(s), len(t)
         dp = [[0] * (m + 1) for _ in range(n + 1)]
+        # 状态初始化: t为空是任何s(包括为空)的子序列，所以dp[0][j] = 1
         for j in range(m + 1):
             dp[0][j] = 1
         for i in range(1, n + 1):

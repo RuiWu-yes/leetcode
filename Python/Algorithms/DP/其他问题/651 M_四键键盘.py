@@ -12,6 +12,9 @@
 class Solution:
     def maxA1(self, N: int) -> int:
         # 动态规划:带备忘录的递归解法
+        # 状态定义：第一个状态是剩余的按键次数，用 n 表示；
+        #         第二个状态是当前屏幕上字符 A 的数量，用 a_num 表示；
+        #         第三个状态是剪切板中字符 A 的数量，用 copy 表示。
         # 时间复杂度:O(N^3), 子问题虽然没有重复了，但数目仍然很多，在LeetCode提交会超时的
         # 对于 (n, a_num, copy) 这个状态，屏幕上能最终最多能有 dp(n, a_num, copy) 个 A
         memo = dict()
@@ -29,14 +32,17 @@ class Solution:
     def maxA2(self, N: int) -> int:
         # 动态规划
         # 时间复杂度 O(N^2)，空间复杂度 O(N)
-        # 定义：dp[i] 表示 i 次操作后最多能显示多少个 A
+        # 定义：dp[i] 表示 i(剩余的敲击次数) 次操作后最多能显示多少个 A
+        # 最优按键序列一定只有两种情况：
+        #    要么一直按 A：A,A,...A（当 N 比较小时）。
+        #    要么是这么一个形式：A,A,...C-A,C-C,C-V,C-V,...C-V（当 N 比较大时）。
+        # 换句话说，最后一次按键要么是 A 要么是 C-V。
         dp = [0 for _ in range(N+1)]
         for i in range(1, N+1):
-            # 按 A 键
-            dp[i] = dp[i-1] + 1
+            dp[i] = dp[i-1] + 1  # 按 A 键，就比上次多一个 A 而已
             for j in range(2, i):
                 # 全选 & 复制 dp[j-2]，连续粘贴 i - j 次
-                # 屏幕上共 dp[j - 2] * (i - j + 1) 个 A
+                # 屏幕上共 dp[j - 2] + dp[j - 2] * (i - j) 个 A
                 dp[i] = max(dp[i], dp[j - 2] * (i - j + 1))
         # N 次按键之后最多有几个 A？
         return dp[N]
@@ -52,7 +58,7 @@ if __name__ == '__main__':
     N2 = 7
 
     sol = Solution()
-    res1_1, res1_2 = sol.maxA1(N1), sol.maxA2(N1)
-    res2_1, res2_2 = sol.maxA1(N2), sol.maxA2(N2)
-    print('case1:', res1_1, res1_2)
-    print('case2:', res2_1, res2_2)
+    res1 = sol.maxA1(N1), sol.maxA2(N1)
+    res2 = sol.maxA1(N2), sol.maxA2(N2)
+    print('case1:', res1)
+    print('case2:', res2)

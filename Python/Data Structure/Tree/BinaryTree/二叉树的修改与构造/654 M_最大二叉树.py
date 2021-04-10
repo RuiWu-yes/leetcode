@@ -7,7 +7,6 @@
 #            2.左子树是通过数组中最大值左边部分构造出的最大二叉树。
 #            3.右子树是通过数组中最大值右边部分构造出的最大二叉树。
 #            通过给定的数组构建最大二叉树，并且输出这个树的根节点。
-import collections
 
 
 # Definition for a binary tree node.
@@ -35,24 +34,10 @@ class Solution:
             return root
         return build(nums, 0, len(nums) - 1)
 
-    def traverse(self, root):
-        res = []
-        deque = collections.deque([root])
-        while deque:
-            node = deque.popleft()
-            if node:
-                res.append(node.val)
-            else:
-                res.append(node)
-                continue
-            if not node.left and not node.right:
-                continue
-            deque.append(node.left) if node.left else deque.append(None)
-            deque.append(node.right) if node.right else deque.append(None)
-        return res
-
 
 if __name__ == '__main__':
+    from libs.tree import BinaryTree as BT
+
     # case1
     # 输入：[3, 2, 1, 6, 0, 5]
     nums = [3, 2, 1, 6, 0, 5]
@@ -66,5 +51,5 @@ if __name__ == '__main__':
     #         1
     sol = Solution()
     root = sol.constructMaximumBinaryTree(nums)
-    res = sol.traverse(root)
+    res = BT().inorder(root)
     print(res)

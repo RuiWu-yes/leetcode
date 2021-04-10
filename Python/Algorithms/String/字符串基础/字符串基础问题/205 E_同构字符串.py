@@ -11,6 +11,8 @@
 class Solution:
     def isIsomorphic1(self, s: str, t: str) -> bool:
         # zip
+        # zip(a, b, c, ...)函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组
+        # 如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 * 号操作符，可以将元组解压为列表。
         word = zip(*set(zip(s, t)))
         for w in word:
             if len(w) != len(set(w)):

@@ -20,26 +20,26 @@ class Solution:
         def traversal(left, right):
             if left > right: return
             mid = left + (right - left) // 2
-            root = TreeNode(nums[mid])
-            root.left = traversal(left, mid - 1)
-            root.right = traversal(mid + 1, right)
+            root = TreeNode(nums[mid])              # 根：有序数组的中间元素
+            root.left = traversal(left, mid - 1)    # 左
+            root.right = traversal(mid + 1, right)  # 右
             return root
         return traversal(0, len(nums) - 1)
 
     def sortedArrayToBST1(self, nums: List[int]) -> TreeNode:
         # 迭代法
         if not nums: return
-        root = TreeNode(0)
+        root = TreeNode()
         queue = [[root, 0, len(nums)-1]]
         while queue:
             curNode, left, right = queue.pop(0)
             mid = left + (right - left) // 2
             curNode.val = nums[mid]  # 将mid对应的元素给中间节点
-            if left <= mid - 1:   # 处理左区间
-                curNode.left = TreeNode(0)
+            if left < mid:   # 处理左区间
+                curNode.left = TreeNode()
                 queue.append([curNode.left, left, mid-1])
-            if right >= mid + 1:  # 处理右区间
-                curNode.right = TreeNode(0)
+            if right > mid:  # 处理右区间
+                curNode.right = TreeNode()
                 queue.append([curNode.right, mid+1, right])
         return root
 

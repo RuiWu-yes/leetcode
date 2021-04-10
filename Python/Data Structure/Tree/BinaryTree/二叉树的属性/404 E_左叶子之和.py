@@ -20,7 +20,7 @@ class Solution:
         leftValue = self.sumOfLeftLeaves1(root.left)  # 左
         rightValue = self.sumOfLeftLeaves1(root.right)  # 右
         midValue = 0
-        if root.left and not root.left.left and not root.left.right:  # 根
+        if root.left and not root.left.left and not root.left.right:  # 找到左叶子节点的值
             midValue = root.left.val
         return midValue + leftValue + rightValue
 
@@ -30,8 +30,8 @@ class Solution:
         res = 0
         stack = [root]
         while stack:
-            node = stack.pop()  # 根
-            if node.left and not node.left.left and not node.left.right:
+            node = stack.pop()
+            if node.left and not node.left.left and not node.left.right:  # 找到左叶子节点的值
                 res += node.left.val
             if node.right:  # 右
                 stack.append(node.right)

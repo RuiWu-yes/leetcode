@@ -10,8 +10,9 @@ from typing import List
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         # 贪心算法
-        # 那么我按照左边界排序，排序之后局部最优：每次合并都取最大的右边界，这样就可以合并更多的区间了，
-        # 整体最优：合并所有重叠的区间。
+        # 那么我按照左边界排序，排序之后
+        #    局部最优：每次合并都取最大的右边界，这样就可以合并更多的区间了，
+        #    整体最优：合并所有重叠的区间。
         res = []
         if not intervals: return res
         intervals.sort(key=lambda x: x[0])

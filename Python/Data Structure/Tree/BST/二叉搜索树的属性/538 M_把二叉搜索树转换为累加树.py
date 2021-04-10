@@ -22,14 +22,15 @@ class Solution:
         # 反序中序遍历(右根左)
         sum = 0
         def traverse(root):
-            nonlocal sum         # nonlocal关键字用来在函数或其他作用域中使用外层(非全局)变量。
+            # nonlocal关键字用来在函数或其他作用域中使用外层(非全局)变量。
+            nonlocal sum
             if not root: return
-            traverse(root.right)
-            # 维护累加和
+            traverse(root.right)  # 右
+            # 维护累加和            # 根
             sum += root.val
             # 将BST转化成累加树
             root.val = sum
-            traverse(root.left)
+            traverse(root.left)   # 左
         traverse(root)
         return root
 

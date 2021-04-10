@@ -24,31 +24,6 @@ class Solution:
         root.right = self.trimBST(root.right, low, high)
         return root
 
-    def trimBST1(self, root: TreeNode, low: int, high: int) -> TreeNode:
-        # 迭代法
-        pass
-    #     # 因为二叉搜索树的有序性,不需要使用栈模拟递归的过程。
-    #     if not root: return
-    #     # 处理头结点,让root移动到[low, high] 范围内,注意是左闭右闭
-    #     while root.val < low or root.val > high:
-    #         if root.val < low:  # 小于low往右走
-    #             root = root.right
-    #         else:               # 大于high往左走
-    #             root = root.left
-    #     cur = root
-    #     # 此时root已经在[low, high] 范围内,处理左孩子元素小于low的情况
-    #     while cur:
-    #         while cur.left and cur.left.val < low:
-    #             cur.left = cur.left.right
-    #         cur = cur.left
-    #     cur = root
-    #     # 此时root已经在[low, high] 范围内,处理右孩子大于high的情况
-    #     while cur:
-    #         while cur.right and cur.right.val > high:
-    #             cur.right = cur.right.left
-    #         cur = cur.right
-    #     return root
-
 
 if __name__ == '__main__':
     from libs.list2tree import ListCreateTree

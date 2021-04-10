@@ -15,7 +15,18 @@ class TreeNode:
 
 class Solution:
     def preorderTraversal1(self, root: TreeNode) -> List[int]:
-        # 迭代法
+        # 递归法(前序遍历：根左右)
+        res = []
+        def traversal(root):
+            if not root: return
+            res.append(root.val)
+            traversal(root.left)
+            traversal(root.right)
+        traversal(root)
+        return res
+
+    def preorderTraversal2(self, root: TreeNode) -> List[int]:
+        # 迭代法(前序遍历：根左右)
         res = []
         if not root: return res
         stack = [root]
@@ -26,15 +37,4 @@ class Solution:
                 stack.append(root.right)
             if root.left:
                 stack.append(root.left)
-        return res
-
-    def preorderTraversal2(self, root: TreeNode) -> List[int]:
-        # 递归法
-        res = []
-        def traversal(root):
-            if not root: return
-            res.append(root.val)
-            traversal(root.left)
-            traversal(root.right)
-        traversal(root)
         return res

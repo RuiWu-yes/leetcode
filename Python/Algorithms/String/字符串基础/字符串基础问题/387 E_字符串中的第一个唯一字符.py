@@ -21,6 +21,7 @@ class Solution:
         return min_unique_char_index if min_unique_char_index != len(s) else -1
 
     def firstUniqChar2(self, s: str) -> int:
+        # 两次遍历：第一次对每个字符计数，第二次找到第一个计数为1的字符
         dic = {c: s.count(c) for c in set(s)}
         # 找到并返回首个满足出现次数为一的字符
         for i, c in enumerate(s):

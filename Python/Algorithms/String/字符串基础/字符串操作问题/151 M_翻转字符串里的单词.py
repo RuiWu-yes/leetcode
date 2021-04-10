@@ -31,7 +31,6 @@ class Solution:
         return ' '.join(re.findall('[^ ]+', s)[::-1])
 
 
-
 if __name__ == '__main__':
     # case1  res = "blue is sky the"
     s1 = "the sky is blue"

@@ -34,7 +34,6 @@ class Solution:
 if __name__ == '__main__':
     from libs.list2tree import ListCreateTree
 
-
     # case1  res = 3
     list = [3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]
     Tree = ListCreateTree()

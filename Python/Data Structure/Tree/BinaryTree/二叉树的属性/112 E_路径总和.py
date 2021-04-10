@@ -18,11 +18,11 @@ class Solution:
     def hasPathSum1(self, root: TreeNode, targetSum: int) -> bool:
         # 递归法
         if not root: return False
-        if not root.left and not root.right and targetSum == root.val:
+        if not root.left and not root.right and targetSum == root.val:  # 左右节点都为空(到达叶子节点)，且路径和为targetSum
             return True
         Left = self.hasPathSum1(root.left, targetSum - root.val)
         Right= self.hasPathSum1(root.right, targetSum - root.val)
-        return Left | Right
+        return Left | Right  # 只要有一边找到了，就为True
 
     def hasPathSum2(self, root: TreeNode, targetSum: int) -> bool:
         # 迭代法

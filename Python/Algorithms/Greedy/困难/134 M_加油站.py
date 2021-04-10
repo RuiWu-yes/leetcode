@@ -17,7 +17,7 @@ class Solution:
         # 贪心算法
         # 直接从全局进行贪心选择，情况如下：
         # 情况一：如果gas的总和小于cost总和，那么无论从哪里出发，一定是跑不了一圈的
-        # 情况二：rest[i] = gas[i]-cost[i]为一天剩下的油，i从0开始计算累加到最后一站，如果累加没有出现负数，
+        # 情况二：rest[i] = gas[i] - cost[i]为一天剩下的油，i从0开始计算累加到最后一站，如果累加没有出现负数，
         #       说明从0出发，油就没有断过，那么0就是起点。
         # 情况三：如果累加的最小值是负数，汽车就要从非0节点出发，从后向前，看哪个节点能这个负数填平，能把这个负数填平的节点就是出发节点。
         curSum = 0
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     cost2 = [3, 4, 3]
 
     sol = Solution()
-    res1_1, res1_2 = sol.canCompleteCircuit1(gas1, cost1), sol.canCompleteCircuit2(gas1, cost1)
-    res2_1, res2_2 = sol.canCompleteCircuit1(gas2, cost2), sol.canCompleteCircuit2(gas2, cost2)
-    print('case1:', res1_1, res1_2)
-    print('case2:', res2_1, res2_2)
+    res1 = sol.canCompleteCircuit1(gas1, cost1), sol.canCompleteCircuit2(gas1, cost1)
+    res2 = sol.canCompleteCircuit1(gas2, cost2), sol.canCompleteCircuit2(gas2, cost2)
+    print('case1:', res1)
+    print('case2:', res2)

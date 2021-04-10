@@ -15,7 +15,18 @@ class TreeNode:
 
 class Solution:
     def postorderTraversal1(self, root: TreeNode) -> List[int]:
-        # 递归法
+        # 递归法(后序遍历：左右根)
+        res = []
+        def traversal(root):
+            if not root: return
+            traversal(root.left)
+            traversal(root.right)
+            res.append(root.val)
+        traversal(root)
+        return res
+
+    def postorderTraversal2(self, root: TreeNode) -> List[int]:
+        # 递归法(后序遍历：左右根)
         res = []
         if not root: return res
         stack = [root]
@@ -27,14 +38,3 @@ class Solution:
                 stack.append(node.right)
             res.append(node.val)
         return res[::-1]
-
-    def postorderTraversal2(self, root: TreeNode) -> List[int]:
-        # 递归法
-        res = []
-        def traversal(root):
-            if not root: return
-            traversal(root.left)
-            traversal(root.right)
-            res.append(root.val)
-        traversal(root)
-        return res

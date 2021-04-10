@@ -17,9 +17,9 @@ class Solution:
         #    dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
         if not prices: return 0
         n = len(prices)
-        if k > n / 2:
-            dp_i_0, dp_i_1 = 0, float('-inf')
-            for i in range(n):
+        if k > n / 2:  # 相当于交易多少次不受限
+            dp_i_0, dp_i_1 = 0, -prices[0]
+            for i in range(1, n):
                 dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
                 dp_i_1 = max(dp_i_1, dp_i_0 - prices[i])
             return dp_i_0

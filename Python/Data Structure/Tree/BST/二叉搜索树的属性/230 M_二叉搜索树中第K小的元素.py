@@ -15,18 +15,20 @@ class TreeNode:
 
 class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
+        # 递归法
+        # BST按中序遍历是有序的
         res, rank = 0, 0  # res记录结果； rank记录当前元素排名
         def traverse(root, k):
             nonlocal res, rank
             if not root: return
-            traverse(root.left, k)
-            # 中序遍历代码位置
+            traverse(root.left, k)   # 左
+            # 中序遍历代码位置          # 根
             rank += 1
-            if k == rank:
+            if rank == k:
                 # 找到第k小元素
                 res = root.val
                 return
-            traverse(root.right, k)
+            traverse(root.right, k)  # 右
         traverse(root, k)
         return res
 

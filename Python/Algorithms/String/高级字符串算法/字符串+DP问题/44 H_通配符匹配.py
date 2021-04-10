@@ -13,27 +13,31 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         # 动态规划
-        # dp[m][n]的定义:【p从0位置到m位置】这一整段，是否能与【s从0位置到n位置】这一整段匹配
-        # s横，p纵
-        zong = len(p) + 1  # 纵轴长度
-        heng = len(s) + 1  # 横轴长度
-        dp = [[False] * heng for _ in range(zong)]
+        # dp[i][j]的定义:【p从0位置到i位置】这一整段，是否能与【s从0位置到j位置】这一整段匹配
+        m, n = len(p), len(s)
+        dp = [[False] * (n + 1) for _ in range(m + 1)]
         dp[0][0] = True
-        for m in range(1, zong):
-            if p[m - 1] == '*':
-                j = 0
-                while j < heng:
-                    if dp[m - 1][j] == True:
-                        break
-                    j += 1
-                while j < heng:
-                    dp[m][j] = True
-                    j += 1
+        for i in range(1, m + 1):
+            # p[i-1] == '*'的情况：要使dp[i][j]为True, 先决条件必须dp[i-1][k]为True,由于'*'的作用是可以匹配任何字符串
+            if p[i - 1] == '*':
+                # 此步骤是查找前一个状态dp[i-1][k]是否有True
+                #     如果没找到，不做任何操作
+                #     如果找到，则从此 k 直到 n 所有的dp[i][k]都为True
+                k = 0
+                while k < n + 1:
+                    if dp[i - 1][k]: break
+                    k += 1
+                while k < n + 1:
+                    dp[i][k] = True
+                    k += 1
                 continue
-            for n in range(1, heng):
-                if dp[m - 1][n - 1] and (p[m - 1] == "?" or p[m - 1] == s[n - 1]):  # 先判断字母是否符合
-                    dp[m][n] = True
-        return dp[zong - 1][heng - 1]
+            for j in range(1, n + 1):
+                # 要使dp[i][j]为True, 先决条件必须dp[i-1][j-1]为True
+                #    要么p[i - 1] == '?'
+                #    要么p[i - 1] == s[j - 1]
+                if dp[i - 1][j - 1] and (p[i - 1] == "?" or p[i - 1] == s[j - 1]):  # 先判断字母是否符合
+                    dp[i][j] = True
+        return dp[m][n]
 
 
 if __name__ == '__main__':

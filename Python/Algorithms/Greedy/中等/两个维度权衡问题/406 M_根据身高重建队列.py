@@ -10,8 +10,30 @@ from typing import List
 
 
 class Solution:
-    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
-        pass
+    def reconstructQueue1(self, people: List[List[int]]) -> List[List[int]]:
+        # 贪心算法(额外 res 数组空间存储)
+        # 按照身高从大到小排序后:
+        #    局部最优:优先按身高高的people的k来插入。插入操作过后的people满足队列属性
+        #    全局最优:最后都做完插入操作，整个队列满足题目队列属性
+        res = []
+        people.sort(key=lambda x: (-x[0], x[1]))
+        for p in people:
+            if len(res) <= p[1]:
+                res.append(p)
+            else:
+                res.insert(p[1], p)
+        return res
+
+    def reconstructQueue2(self, people: List[List[int]]) -> List[List[int]]:
+        # 贪心算法(原地操作)
+        people.sort(key=lambda x: (-x[0], x[1]))
+        i = 0
+        while i < len(people):
+            if i > people[i][1]:
+                people.insert(people[i][1], people[i])
+                people.pop(i + 1)
+            i += 1
+        return people
 
 
 if __name__ == '__main__':
@@ -30,7 +52,7 @@ if __name__ == '__main__':
     people2 = [[6, 0], [5, 0], [4, 0], [3, 2], [2, 2], [1, 4]]
 
     sol = Solution()
-    res1 = sol.reconstructQueue(people1)
-    res2 = sol.reconstructQueue(people2)
+    res1 = sol.reconstructQueue1(people1), sol.reconstructQueue2(people1)
+    res2 = sol.reconstructQueue1(people2), sol.reconstructQueue2(people2)
     print('case1:', res1)
     print('case2:', res2)

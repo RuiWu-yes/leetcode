@@ -25,6 +25,8 @@ class Solution:
 
     def maxSubArray2(self, nums) -> int:
         # 动态规划
+        # dp[i]的定义:「以 nums[i] 为结尾的最大子数组和/最长递增子序列为 dp[i]」
+        # 因为只有这样定义才能将 dp[i+1] 和 dp[i] 建立起联系，利用数学归纳法写出状态转移方程。
         n = len(nums)
         if n == 0: return 0
         dp = [0 for _ in range(n)]
@@ -58,7 +60,5 @@ if __name__ == '__main__':
     nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 
     sol = Solution()
-    res1 = sol.maxSubArray1(nums)
-    res2 = sol.maxSubArray2(nums)
-    res3 = sol.maxSubArray3(nums)
-    print('case1:', res1, res2, res3)
+    res1 = sol.maxSubArray1(nums), sol.maxSubArray2(nums), sol.maxSubArray3(nums)
+    print('case1:', res1)

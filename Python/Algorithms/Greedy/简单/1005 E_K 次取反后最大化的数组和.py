@@ -5,10 +5,11 @@
 # @Content : 给定一个整数数组 A，我们只能用以下方法修改该数组：
 #               我们选择某个索引 i 并将 A[i] 替换为 -A[i]，然后总共重复这个过程 K 次。（我们可以多次选择同一个索引 i。）
 #               以这种方式修改数组后，返回数组可能的最大和。
+from typing import List
 
 
 class Solution:
-    def largestSumAfterKNegations(self, A, K: int) -> int:
+    def largestSumAfterKNegations(self, A: List[int], K: int) -> int:
         # 贪心算法
         # 局部最优: 让绝对值大的负数变为正数, 当前数值达到最大, 整体最优: 整个数组和达到最大。
         # 局部最优可以推出全局最优。

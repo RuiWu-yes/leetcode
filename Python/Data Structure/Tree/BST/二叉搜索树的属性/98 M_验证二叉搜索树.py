@@ -21,15 +21,15 @@ class Solution:
     # 其次，root 的整个左子树都要小于 root.val，整个右子树都要大于 root.val
     def isValidBST(self, root: TreeNode) -> bool:
         # 限定以 root 为根的子树节点必须满足 max.val > root.val > min.val
-        def isvalidBST(root, min, max):
+        def validBST(root, leftNode, rightNode):
             # base case
             if not root: return True
             # 若 root.val 不符合 max 和 min 的限制，说明不是合法 BST
-            if min != None and root.val <= min.val: return False
-            if max != None and root.val >= max.val: return False
+            if leftNode and root.val <= leftNode.val: return False
+            if rightNode and root.val >= rightNode.val: return False
             # 限定左子树的最大值是 root.val, 右子树的最小值是 root.val
-            return isvalidBST(root.left, min, root) and isvalidBST(root.right, root, max)
-        return isvalidBST(root, None, None)
+            return validBST(root.left, leftNode, root) and validBST(root.right, root, rightNode)
+        return validBST(root, None, None)
 
 
 if __name__ == '__main__':

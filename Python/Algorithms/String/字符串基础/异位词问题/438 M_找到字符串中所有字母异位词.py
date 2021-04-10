@@ -15,14 +15,20 @@ class Solution:
         # 滑动窗口
         res = []
         need, window = Counter(p), defaultdict(lambda: 0)
+        # 初始化窗口左右边界为s最左侧
+        # valid记录窗口中有几个所需字符满足异位词条件，初始为0
         left, right, valid = 0, 0, 0
         while right < len(s):
+            # 移动窗口右边界(移动一次，更新一次窗口信息)
             c = s[right]
             right += 1
             if c in need:
                 window[c] += 1
                 if window[c] == need[c]:
                     valid += 1
+            # valid等于need的长度, 说明此时所需字符都满足异位词条件
+            #    首先判断窗口长度(right - left)是否等于p的长度，如果等于则说明此时的窗口中的字符串是p的字母异位词
+            #    再移动窗口左边界(移动一次，更新一次窗口信息)
             while valid == len(need):
                 if right - left == len(p):
                     res.append(left)

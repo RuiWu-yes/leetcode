@@ -15,19 +15,7 @@ class TreeNode:
 
 class Solution:
     def inorderTraversal1(self, root: TreeNode) -> List[int]:
-        # 迭代法
-        res, stack = [], []
-        while root or stack:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            res.append(root.val)
-            root = root.right
-        return res
-
-    def inorderTraversal2(self, root: TreeNode) -> List[int]:
-        # 递归法
+        # 递归法(中序遍历：左根右)
         res = []
         def traversal(root):
             if not root: return
@@ -37,3 +25,15 @@ class Solution:
         traversal(root)
         return res
 
+    def inorderTraversal2(self, root: TreeNode) -> List[int]:
+        # 迭代法(中序遍历：左根右)
+        res, stack = [], []
+        while root or stack:
+            # 先把所有的从根开始的左子树的根节点压入栈中(左根)，后逐层又添加当前层的右节点
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()  # 当前子树的根节点
+            res.append(root.val)
+            root = root.right  # 当前左子树的右孩子节点(右)
+        return res

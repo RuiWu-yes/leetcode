@@ -24,9 +24,16 @@ class Solution:
 
     def minInsertions2(self, s: str) -> int:
         # 动态规划: 时间和空间复杂度都是 O(N^2)
+        # dp[i][j] 的定义：对字符串 s[i..j]，最少需要进行 dp[i][j] 次插入才能变成回文串。
+        # 状态转移就是从小规模问题的答案推导更大规模问题的答案，从 base case 向其他状态推导嘛。如果我们现在想计算 dp[i][j] 的值，
+        # 而且假设我们已经计算出了子问题 dp[i+1][j-1] 的值了，你能不能想办法推出 dp[i][j] 的值呢？
+        #    既然已经算出 dp[i+1][j-1]，即知道了 s[i+1..j-1] 成为回文串的最小插入次数，那么也就可以认为 s[i+1..j-1] 已经是一个回文串了，
+        #    所以通过 dp[i+1][j-1] 推导 dp[i][j] 的关键就在于 s[i] 和 s[j] 这两个字符。
+        #    1) 如果 s[i] == s[j] 的话，我们不需要进行任何插入，只要知道如何把 s[i+1..j-1] 变成回文串即可
+        #    2) 如果 s[i] != s[j] 的话，无脑插入两次肯定是可以让 s[i..j] 变成回文串，但是不一定是插入次数最少的，最优的插入方案应该被拆解成如下流程：
+        #       步骤1 做选择，先将 s[i..j-1] 或者 s[i+1..j] 变成回文串。怎么做选择呢？谁变成回文串的插入次数少，就选谁呗。
+        #       步骤2 根据步骤1的选择，将 s[i..j] 变成回文
         n = len(s)
-        # 定义：对 s[i..j]，最少需要插入 dp[i][j] 次才能变成回文
-        # 我们定义一个二维的 dp 数组，dp[i][j] 的定义如下：对字符串 s[i..j]，最少需要进行 dp[i][j] 次插入才能变成回文串。
         dp = [[0]*n for _ in range(n)]
         # base case：i == j 时 dp[i][j] = 0，单个字符本身就是回文
         # dp 数组已经全部初始化为 0，base case 已初始化
@@ -48,7 +55,7 @@ class Solution:
         dp = [0 for _ in range(n)]
         for i in range(n-2, -1, -1):
             # 记录 dp[i+1][j-1]
-            pre = 0
+            pre = 0   # 每次换行，都要将pre置0 (因为向右遍历，pre就会记录一次。这样如果换行的时候，pre记录的就不是左相邻的值)
             for j in range(i+1, n):
                 temp = dp[j]
                 if s[i] == s[j]:
@@ -81,13 +88,13 @@ if __name__ == '__main__':
     s5 = "no"
 
     sol = Solution()
-    res1_1, res1_2, res1_3 = sol.minInsertions1(s1), sol.minInsertions2(s1), sol.minInsertions3(s1)
-    res2_1, res2_2, res2_3 = sol.minInsertions1(s2), sol.minInsertions2(s2), sol.minInsertions3(s2)
-    res3_1, res3_2, res3_3 = sol.minInsertions1(s3), sol.minInsertions2(s3), sol.minInsertions3(s3)
-    res4_1, res4_2, res4_3 = sol.minInsertions1(s4), sol.minInsertions2(s4), sol.minInsertions3(s4)
-    res5_1, res5_2, res5_3 = sol.minInsertions1(s5), sol.minInsertions2(s5), sol.minInsertions3(s5)
-    print('case1:', res1_1, res1_2, res1_3)
-    print('case2:', res2_1, res2_2, res2_3)
-    print('case3:', res3_1, res3_2, res3_3)
-    print('case4:', res4_1, res4_2, res4_3)
-    print('case5:', res5_1, res5_2, res5_3)
+    res1 = sol.minInsertions1(s1), sol.minInsertions2(s1), sol.minInsertions3(s1)
+    res2 = sol.minInsertions1(s2), sol.minInsertions2(s2), sol.minInsertions3(s2)
+    res3 = sol.minInsertions1(s3), sol.minInsertions2(s3), sol.minInsertions3(s3)
+    res4 = sol.minInsertions1(s4), sol.minInsertions2(s4), sol.minInsertions3(s4)
+    res5 = sol.minInsertions1(s5), sol.minInsertions2(s5), sol.minInsertions3(s5)
+    print('case1:', res1)
+    print('case2:', res2)
+    print('case3:', res3)
+    print('case4:', res4)
+    print('case5:', res5)

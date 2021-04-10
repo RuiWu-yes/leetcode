@@ -16,11 +16,11 @@ class Solution:
         # 双指针法
         left, right = 0, len(s) - 1
         while left < right:
-            while left < len(s) and not s[left].isalnum():
+            while left < len(s) and not s[left].isalnum():  # 跳过非字母
                 left += 1
-            while right > -1 and not s[right].isalnum():
+            while right > -1 and not s[right].isalnum():  # 跳过非字母
                 right -= 1
-            if left > right:
+            if left > right: # 对于没有没有字母的情况(比如：",.", " ")，如果不在此返回结果，下面的if判断就会报错
                 return True
             if s[left].upper() != s[right].upper():
                 return False
@@ -37,8 +37,13 @@ if __name__ == '__main__':
     # case2  res = false
     s2 = "race a car"
 
+    # case3  res = True
+    s3 = ",."
+
     sol = Solution()
     res1 = sol.isPalindrome1(s1), sol.isPalindrome2(s1)
     res2 = sol.isPalindrome1(s2), sol.isPalindrome2(s2)
+    res3 = sol.isPalindrome1(s3), sol.isPalindrome2(s3)
     print('case1:', res1)
     print('case2:', res2)
+    print('case3:', res3)

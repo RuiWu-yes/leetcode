@@ -17,11 +17,11 @@ class Solution:
     def minDepth1(self, root: TreeNode) -> int:
         # 递归法
         if not root: return 0
-        if not root.left and root.right:  # 碰到叶子节点
+        if not root.left and root.right:  # 左节点为空，右节点不为空
             return self.minDepth1(root.right) + 1
-        if root.left and not root.right:  # 碰到叶子节点
+        if root.left and not root.right:  # 左节点不为空，右节点为空
             return self.minDepth1(root.left) + 1
-        return min(self.minDepth1(root.left), self.minDepth1(root.right)) + 1
+        return min(self.minDepth1(root.left), self.minDepth1(root.right)) + 1  # 左节点不为空，右节点不为空
 
     def minDepth2(self, root: TreeNode) -> int:
         # 迭代法

@@ -11,19 +11,33 @@
 class Solution:
     def maxProfit1(self, prices, fee: int) -> int:
         # 动态规划
-        #    dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
-        #    dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)
+        # dp[i][0/1]的定义：在第 i 天，手上没有持有(0)或者持有(1)股票，所能获取的最大利润
+        #    dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])        # 前一天没有持有股票，当天不进行任何操作/前一天持有股票，当天卖出股票
+        #    dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)  # 前一天持有股票，当天不进行任何操作/前一天没有持有股票，当天买入股票，同时支付这次交易的手续费
         #    解释：相当于买入股票的价格升高了。
         #         在第一个式子里减也是一样的，相当于卖出股票的价格减小了。
         if not prices: return 0
         n = len(prices)
-        dp_i_0, dp_i_1 = 0, float('-inf')
+        dp = [[0]*2 for _ in range(n)]
+        for i in range(n):
+            if i - 1 == -1:
+                dp[0][0], dp[0][1] = 0, -prices[0] - fee
+                continue
+            dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+            dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)
+        return dp[n-1][0]
+
+    def maxProfit2(self, prices, fee: int) -> int:
+        # 动态规划:状态压缩
+        if not prices: return 0
+        n = len(prices)
+        dp_i_0, dp_i_1 = 0, -prices[0] - fee
         for i in range(n):
             dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
             dp_i_1 = max(dp_i_1, dp_i_0 - prices[i] - fee)
         return dp_i_0
 
-    def maxProfit2(self, prices, fee: int) -> int:
+    def maxProfit3(self, prices, fee: int) -> int:
         # 贪心算法
         # 如果使用贪心策略，就是最低值买，最高值（如果算上手续费还盈利）就卖。
         # 此时无非就是要找到两个点，买入日期和卖出日期。
@@ -63,5 +77,5 @@ if __name__ == '__main__':
     fee = 2
 
     sol = Solution()
-    res1, res2 = sol.maxProfit1(prices, fee), sol.maxProfit2(prices, fee)
-    print('case1:', res1, res2)
+    res1 = sol.maxProfit1(prices, fee), sol.maxProfit2(prices, fee), sol.maxProfit3(prices, fee)
+    print('case1:', res1)

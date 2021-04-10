@@ -26,8 +26,7 @@ class Solution:
             while valid == len(need):  # 当valid为t的长度时，说明包含了t中的所有字符。此时right停止，开始left更新
                 # 在这里更新最小覆盖子串
                 if right - left < length:  # 第一次length肯定小于float('inf')，更新新length，之后只要比现有length小就更新
-                    start = left
-                    length = right - left
+                    start, length = left, right - left
                 d = s[left]  # d是将移出窗口的字符
                 left += 1  # 左移窗口
                 # 进行窗口内数据的一系列更新
@@ -54,8 +53,7 @@ class Solution:
             while valid == len(need):
                 # 在这里更新最小覆盖子串
                 if right - left < length:
-                    start = left
-                    length = right - left
+                    start, length = left, right - left
                 d = s[left]  # d是将移出窗口的字符
                 left += 1  # 左移窗口
                 # 进行窗口内数据的一系列更新

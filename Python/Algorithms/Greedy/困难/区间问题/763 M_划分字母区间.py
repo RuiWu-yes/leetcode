@@ -25,7 +25,7 @@ class Solution:
             right = max(right, map[S[i]])  # 找到字符出现的最远边界
             if i == right:
                 res.append(right - left + 1)
-                left = i + 1
+                left = i + 1  # 更新左边界
         return res
 
 

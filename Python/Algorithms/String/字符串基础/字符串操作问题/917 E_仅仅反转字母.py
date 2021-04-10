@@ -11,26 +11,26 @@ class Solution:
         ls = list(S)
         left, right = 0, len(ls) - 1
         while left < right:
-            if not ls[left].isalpha():
+            if not ls[left].isalpha():  # left非字母直接跳过
                 left += 1
-            elif not ls[right].isalpha():
+            elif not ls[right].isalpha():  # right非字母直接跳过
                 right -= 1
-            else:
+            else:  # left, right都是字母，交换
                 ls[left], ls[right] = ls[right], ls[left]
                 left += 1
                 right -= 1
         return "".join(ls)
 
     def reverseOnlyLetters2(self, S: str) -> str:
-        # 字母栈
+        # 字母栈(先入后出)
         letters = [c for c in S if c.isalpha()]
-        res = []
+        stack = []
         for c in S:
             if c.isalpha():
-                res.append(letters.pop())
+                stack.append(letters.pop())
             else:
-                res.append(c)
-        return "".join(res)
+                stack.append(c)
+        return "".join(stack)
 
 
 if __name__ == '__main__':

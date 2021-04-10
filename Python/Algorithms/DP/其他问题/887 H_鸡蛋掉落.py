@@ -19,15 +19,13 @@ class Solution:
             # 避免重复计算
             if (K, N) in memo:
                 return memo[(K, N)]
-            res = float('INF')
+            res = float('inf')
             # 穷举所有可能的选择
             for i in range(1, N+1):
-                res = min(res,
-                          max(
-                              dp(K, N - i),
-                              dp(K - 1, i - 1)
-                          ) + 1
-                          )
+                res = min(
+                          res,
+                          max(dp(K, N - i), dp(K - 1, i - 1)) + 1
+                         )
             # 记入备忘录
             memo[(K, N)] = res
             return res
@@ -56,7 +54,7 @@ class Solution:
             if N == 0: return 0
             if (K, N) in memo:
                 return memo[(K, N)]
-            res = float('INF')
+            res = float('inf')
             # 用二分搜索代替线性搜索
             lo, hi = 1, N
             while lo <= hi:
@@ -77,23 +75,25 @@ class Solution:
 
 if __name__ == '__main__':
     # # case1  res = 2
-    # # 鸡蛋从 1 楼掉落.如果它碎了,我们肯定知道 F = 0.
-    # # 否则,鸡蛋从 2 楼掉落。如果它碎了，我们肯定知道 F = 1.
-    # # 如果它没碎,那么我们肯定知道 F = 2.
-    # # 因此,在最坏的情况下我们需要移动 2 次以确定 F 是多少.
-    # K = 1
-    # N = 2
+    # 鸡蛋从 1 楼掉落.如果它碎了,我们肯定知道 F = 0.
+    # 否则,鸡蛋从 2 楼掉落。如果它碎了，我们肯定知道 F = 1.
+    # 如果它没碎,那么我们肯定知道 F = 2.
+    # 因此,在最坏的情况下我们需要移动 2 次以确定 F 是多少.
+    K1 = 1
+    N1 = 2
 
-    # # case2  res = 3
-    # K = 2
-    # N = 6
+    # case2  res = 3
+    K2 = 2
+    N2 = 6
 
     # case3  res = 4
-    K = 3
-    N = 14
+    K3 = 3
+    N3 = 14
 
     sol = Solution()
-    res1 = sol.superEggDrop1(K, N)
-    res2 = sol.superEggDrop2(K, N)
-    res3 = sol.superEggDrop3(K, N)
-    print(res1, res2, res3)
+    res1 = sol.superEggDrop1(K1, N1), sol.superEggDrop2(K1, N1), sol.superEggDrop3(K1, N1)
+    res2 = sol.superEggDrop1(K2, N2), sol.superEggDrop2(K2, N2), sol.superEggDrop3(K2, N2)
+    res3 = sol.superEggDrop1(K3, N3), sol.superEggDrop2(K3, N3), sol.superEggDrop3(K3, N3)
+    print('case1:', res1)
+    print('case2:', res2)
+    print('case3:', res3)

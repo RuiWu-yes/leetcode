@@ -16,12 +16,13 @@ class TreeNode:
 
 class Solution:
     def binaryTreePaths1(self, root: TreeNode) -> List[str]:
-        # 递归法（回溯）
-        # 前序遍历
+        # 递归法
+        # 前序遍历（回溯）
         if not root: return []
         res = []
         def traversal(cur, path):
             path += str(cur.val)  # 根
+            # 递归终止条件：左右节点都为空(到达叶子节点)
             if not cur.left and not cur.right:
                 res.append(path)
                 return
@@ -34,18 +35,15 @@ class Solution:
         # 迭代法
         if not root: return []
         res = []
-        treeStack, pathStack = [root], [str(root.val)]
-        while treeStack:
-            node = treeStack.pop()  # 根
-            path = pathStack.pop()
+        stack = [[root, str(root.val)]]
+        while stack:
+            node, path = stack.pop()  # 根
             if not node.left and not node.right:
                 res.append(path)
             if node.right:  # 右
-                treeStack.append(node.right)
-                pathStack.append(path + "->" + str(node.right.val))
+                stack.append([node.right, path + "->" + str(node.right.val)])
             if node.left:   # 左
-                treeStack.append(node.left)
-                pathStack.append(path + "->" + str(node.left.val))
+                stack.append([node.left, path + "->" + str(node.left.val)])
         return res
 
 

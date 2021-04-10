@@ -46,7 +46,7 @@ class Solution:
             if i not in dic:
                 return False
             else:
-                if dic[i] == 1:
+                if dic[i] == 1:  # 当等于1的时候，如果不删除，则 -1 会等于 0，最后dic不会置空
                     del dic[i]
                 else:
                     dic[i] -= 1

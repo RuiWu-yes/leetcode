@@ -17,21 +17,23 @@ class TreeNode:
 class Solution:
     def getMinimumDifference1(self, root: TreeNode) -> int:
         # 递归法
+        # 中序遍历
         res = float('inf')
-        pre = None
+        pre = None  # pre作用是记录上一层的节点
         def traversal(cur):
             nonlocal res, pre
             if not cur: return
             traversal(cur.left)   # 左
             if pre:               # 根
-                res = min(res, cur.val - pre.val)
-            pre = cur
+                res = min(res, cur.val - pre.val)  # # 当前节点cur与上一个节点pre比较绝对值之差
+            pre = cur  # 上一步比较完之后，pre记录当前节点
             traversal(cur.right)  # 右
         traversal(root)
         return res
 
     def getMinimumDifference2(self, root: TreeNode) -> int:
         # 迭代法
+        # 中序遍历
         stack = []
         res = float('inf')
         pre, cur = None, root
@@ -42,8 +44,8 @@ class Solution:
             else:
                 cur = stack.pop()
                 if pre:            # 根
-                    res = min(res, cur.val - pre.val)
-                pre = cur
+                    res = min(res, cur.val - pre.val)  # 当前节点cur与上一个节点pre比较绝对值之差
+                pre = cur  # 上一步比较完之后，pre记录当前节点
                 cur = cur.right    # 右
         return res
 
