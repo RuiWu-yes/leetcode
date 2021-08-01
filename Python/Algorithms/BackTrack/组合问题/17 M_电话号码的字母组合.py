@@ -20,7 +20,7 @@ class Solution:
         # 回溯算法
         res = []
         if not digits: return res
-        def backtrack(digits, i, track):
+        def backtrack(i, track):
             if len(track) == len(digits):
                 res.append(''.join(track[:]))
                 return
@@ -28,9 +28,9 @@ class Solution:
                 return
             for s in phoneMap[digits[i]]:
                 track.append(s)
-                backtrack(digits, i+1, track)
+                backtrack(i+1, track)
                 track.pop()
-        backtrack(digits, 0, [])
+        backtrack(0, [])
         return res
 
 

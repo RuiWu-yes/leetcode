@@ -15,7 +15,7 @@ class Solution:
             if len(track) == k and sum(track) == n:
                 res.append(track[:])
                 return
-            # 剪枝
+            # 剪枝(路径track中元素的个数超过k个 or 元素和 > n, 直接剪掉)
             if len(track) > k or sum(track) > n:
                 return
             for i in range(start, 10):

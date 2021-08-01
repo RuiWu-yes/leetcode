@@ -11,11 +11,14 @@ class Solution:
         nums.sort()
         res = []
         def backtrack(visited, track):
+            # visited = [0] * len(nums): 利用数组的索引记录元素是否访问过
             if len(track) == len(nums):
                 res.append(track[:])
                 return
             for i in range(len(nums)):
-                if visited[i] or i > 0 and nums[i] == nums[i-1] and not visited[i-1]:
+                # 1) 由于每次选择都是遍历整个数组，因此选择过的数要忽略
+                # 2) 由于数组可能含有重复数字且返回的结果不能重复，因此同一层做选择的时候不能重复选择一样的数
+                if visited[i] or (i > 0 and nums[i] == nums[i-1] and not visited[i-1]):
                     continue
                 track.append(nums[i])
                 visited[i] = 1

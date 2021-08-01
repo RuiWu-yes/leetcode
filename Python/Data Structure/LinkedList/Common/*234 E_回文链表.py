@@ -63,6 +63,7 @@ if __name__ == '__main__':
     head1 = ListNode(1)
     sll = ll.SingleLinkedList(head1)
     for x in [2]: sll.append(x)
+
     # case2  输入：1->2->2->1->None  输出：True
     head2 = ListNode(1)
     sll = ll.SingleLinkedList(head2)

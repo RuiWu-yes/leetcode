@@ -14,9 +14,9 @@ class Solution:
             if start >= len(s):
                 res.append(track[:])
                 return
-            for end in range(start+1, len(s)+1):
+            for end in range(start+1, len(s)+1):  # end表示的是s[start:end], end是开区间取不到
                 str = s[start:end]
-                if str == str[::-1]:
+                if str == str[::-1]:  # 判断是否为回文串
                     track.append(str)
                     backtrack(end, track)
                     track.pop()

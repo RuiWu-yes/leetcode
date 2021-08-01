@@ -33,7 +33,7 @@ class RandomizedSet:
             return False
         # 若 val 不存在，插入到 nums 尾部，
         # 并记录 val 对应的索引值
-        self.valToIndex[val] = len(self.nums)
+        self.valToIndex[val] = len(self.nums)  # 索引没有数组长度-1，是因为此时还没有尾插入元素，此时数组长度就等于添加val元素的索引
         self.nums.append(val)
         return True
 

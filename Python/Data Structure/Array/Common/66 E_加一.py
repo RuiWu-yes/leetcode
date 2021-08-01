@@ -15,11 +15,11 @@ class Solution:
         for i in range(len(digits)-1, -1, -1):
             if digits[i] != 9:
                 digits[i] += 1
-                return digits
+                return digits  # 此return 处理的是像 199 和 123 这两种情况
             digits[i] = 0
         digits[0] = 1
         digits.append(0)
-        return digits
+        return digits  # 此return 处理的是像 99 这种全是9的情况
 
 
 if __name__ == '__main__':

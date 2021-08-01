@@ -6,10 +6,11 @@
 #            中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。
 # @Explain : 1) 所有数字（包括 target）都是正整数。
 #            2) 解集不能包含重复的组合。
+from typing import List
 
 
 class Solution:
-    def combinationSum(self, candidates, target: int):
+    def combinationSum(self, candidates: List[int], target: int):
         # 回溯算法
         candidates.sort()
         res = []
@@ -19,10 +20,10 @@ class Solution:
                 return
             for i in range(start, len(candidates)):
                 sums += candidates[i]
-                if sums > target:
+                if sums > target:  # 剪枝，路径track中元素和 > target，显然后面在添加元素不能满足返回条件
                     return
                 track.append(candidates[i])
-                backtrack(sums, i, track)
+                backtrack(sums, i, track)  # 39_组合总和: i  40_组合总和I: i+1
                 sums -= candidates[i]
                 track.pop()
         backtrack(0, 0, [])

@@ -12,16 +12,18 @@
 #      2) 将堆顶元素R[1]与最后一个元素R[n]交换，此时得到新的无序区(R1,R2,……Rn-1)和新的有序区(Rn),且满足R[1,2…n-1]<=R[n]；
 #      3) 由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,……Rn-1)调整为新堆，然后再次将R[1]与无序区最后一个元素交换，
 #         得到新的无序区(R1,R2….Rn-2)和新的有序区(Rn-1,Rn)。不断重复此过程直到有序区的元素个数为n-1，则整个排序过程完成。
-length = 0
+# 技巧：升序用大顶堆，降序用小顶堆
 
 
 class Sort:
+    def __init__(self):
+        self.length = 0
+
     def buildMaxHeap(self, nums):
         # 建立最大堆
-        global length
-        length = len(nums)
+        self.length = len(nums)
 
-        for i in range(length // 2, -1, -1):  # i：可认为是根节点
+        for i in range(self.length // 2, -1, -1):  # i：可认为是根节点
             self.heapify(nums, i)
 
     def heapify(self, nums, i):
@@ -30,13 +32,13 @@ class Sort:
         right = 2 * i + 2
         largest = i  # 根(默认是最大)
 
-        if left < length and nums[left] > nums[largest]:  # 左
+        if left < self.length and nums[left] > nums[largest]:  # 左
             # 如果左节点存在
             # 将左节点的值与根节点的值去比较:
             #    如果largest(此时是根节点)值小于左节点的值，不满足最大堆，将左节点标记为最大值节点
             #    否则不做任何处理
             largest = left
-        if right < length and nums[right] > nums[largest]:  # 右
+        if right < self.length and nums[right] > nums[largest]:  # 右
             # 如果右节点存在
             # 将右节点的值与根节点的值去比较:
             #    如果largest(此时是根节点或者是左节点)值小于右节点的值，不满足最大堆，将右节点标记为最大值节点
@@ -54,8 +56,7 @@ class Sort:
             # 将堆顶元素R1与最后一个元素Rn交换，此时得到新的无序区(R1,R2,……Rn-1)和新的有序区(Rn), 且满足 R[1,2…n-1] <= R[n]
             nums[0], nums[i] = nums[i], nums[0]
             # 新的无序区(R1,R2,……Rn-1)的长度 - 1
-            global length
-            length -= 1
+            self.length -= 1
             # 由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,……Rn-1)调整为新堆
             self.heapify(nums, 0)
         return nums

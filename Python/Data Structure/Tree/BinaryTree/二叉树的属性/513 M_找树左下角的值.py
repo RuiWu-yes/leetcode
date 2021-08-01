@@ -22,7 +22,8 @@ class Solution:
         while queue:
             for i in range(len(queue)):
                 node = queue.pop(0)
-                if i == 0: res = node.val  # 记录当前行的第一个元素
+                if i == 0:
+                    res = node.val  # 记录当前行的第一个元素
                 if node.left:
                     queue.append(node.left)
                 if node.right:

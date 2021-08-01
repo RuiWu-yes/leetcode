@@ -18,14 +18,14 @@ class Solution:
                 res.append(track[:])
                 return
             for i in range(start, len(candidates)):
-                # 同一层不能选择重复的数
+                # 由于数组可能含有重复数字且返回的结果不能重复，因此同一层做选择的时候不能重复选择一样的数
                 if i > start and candidates[i] == candidates[i-1]:
                     continue
                 sums += candidates[i]
-                if sums > target:
+                if sums > target:  # 剪枝(路径track中元素和 > target，显然后面在添加元素不能满足返回条件)
                     return
                 track.append(candidates[i])
-                backtrack(sums, i+1, track)
+                backtrack(sums, i+1, track)  # 39_组合总和: i  40_组合总和I: i+1
                 sums -= candidates[i]
                 track.pop()
         backtrack(0, 0, [])

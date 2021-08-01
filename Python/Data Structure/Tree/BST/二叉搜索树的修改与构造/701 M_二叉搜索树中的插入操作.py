@@ -31,6 +31,11 @@ if __name__ == '__main__':
     from libs.tree import BinaryTree
 
     # case1  res = [4, 2, 7, 1, 3, 5]
+    #     4               4
+    #    / \            /   \
+    #   2   7   -->    2     7
+    #  / \            / \   /
+    # 1   3          1   3 5
     list = [4, 2, 7, 1, 3]
     Tree = ListCreateTree()
     root = Tree.lct(None, list, 0)

@@ -25,7 +25,7 @@ class Solution:
             if not cur: return
             traversal(cur.left)   # 左
             if pre:               # 根
-                res = min(res, cur.val - pre.val)  # # 当前节点cur与上一个节点pre比较绝对值之差
+                res = min(res, cur.val - pre.val)  # 当前节点cur与上一个节点pre比较绝对值之差
             pre = cur  # 上一步比较完之后，pre记录当前节点
             traversal(cur.right)  # 右
         traversal(root)

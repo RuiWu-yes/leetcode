@@ -9,6 +9,8 @@ from typing import List
 class Solution:
     def trap1(self, height: List[int]) -> int:
         # 暴力法(时间复杂度O(N^2), 空间复杂度O(1))
+        # 对于这种问题，我们不要想整体，而应该去想局部
+        #    可以发现这道题的思路其实很简单。具体来说，仅仅对于位置 i，能装下多少水呢？
         n = len(height)
         res = 0
         for i in range(1, n-1):
@@ -21,6 +23,10 @@ class Solution:
                 l_max = max(l_max, height[j])
             # 如果自己就是最高的话
             # l_max == r_max == height[i]
+
+            # 位置 i 能达到的水柱高度和其左边的最高柱子、右边的最高柱子有关，
+            # 我们分别称这两个柱子高度为 l_max 和 r_max；位置 i 最大的水柱高度就是 min(l_max, r_max)。
+            # 更进一步，对于位置 i，能够装的水为：
             res += min(l_max, r_max) - height[i]
         return res
 

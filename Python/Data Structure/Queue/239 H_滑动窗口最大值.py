@@ -11,7 +11,7 @@ from typing import List
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         # 队列(先入先出)
-        res, queue = [], []
+        res, queue = [], []  # res:返回结果  queue:记录窗口元素的索引, 且队列最左边对应的值是队列最大
         for i in range(len(nums)):
             if not queue:  # 如果为空直接加入队列
                 queue.append(i)
@@ -20,8 +20,9 @@ class Solution:
                     queue.pop(0)
                 while queue and nums[queue[-1]] < nums[i]:  # 将小于当前值的队尾元素依次出队
                     queue.pop()
-                queue.append(i)  # 将当前值加入队列
+                queue.append(i)  # 将当前值索引加入队列
             res.append(nums[queue[0]])  # 队首即最大值
+        print(res)
         return res[k-1:]  # k-1前不是有效的滑动窗口
 
 

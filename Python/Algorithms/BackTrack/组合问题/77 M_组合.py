@@ -11,22 +11,22 @@ class Solution:
         res = []
         if k <= 0 or n <= 0:
             return res
-        def backtrack(n, k, start, track):
+        def backtrack(start, track):
             if k == len(track):
                 res.append(track[:])
                 return
             for i in range(start, n+1):
                 track.append(i)
-                backtrack(n, k, i+1, track)
+                backtrack(i+1, track)
                 track.pop()
-        backtrack(n, k, 1, [])
+        backtrack(1, [])
         return res
 
 
 if __name__ == '__main__':
-    # case1
-    n, k = 4, 2
+    # case1  res = [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]
+    n1, k1 = 4, 2
 
     s = Solution()
-    res = s.combine(n, k)
-    print(res)
+    res1 = s.combine(n1, k1)
+    print('case1:', res1)

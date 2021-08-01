@@ -20,7 +20,7 @@ class Solution:
                 left += 1
             while right > -1 and not s[right].isalnum():  # 跳过非字母
                 right -= 1
-            if left > right: # 对于没有没有字母的情况(比如：",.", " ")，如果不在此返回结果，下面的if判断就会报错
+            if left > right:  # 对于没有没有字母的情况(比如：",.", " ")，如果不在此返回结果，下面的if判断就会报错
                 return True
             if s[left].upper() != s[right].upper():
                 return False

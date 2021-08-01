@@ -29,7 +29,7 @@ class Solution:
         queue = [root]
         while queue:
             depth += 1
-            for i in range(len(queue)):
+            for _ in range(len(queue)):
                 node = queue.pop()
                 if node.left: queue.append(node.left)
                 if node.right: queue.append(node.right)

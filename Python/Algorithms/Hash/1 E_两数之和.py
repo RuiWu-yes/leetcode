@@ -53,12 +53,9 @@ if __name__ == '__main__':
     target3 = 6
 
     sol = Solution()
-    res1_1 = sol.twoSum1(nums1, target1)
-    res1_2 = sol.twoSum2(nums1, target1)
-    res2_1 = sol.twoSum1(nums2, target2)
-    res2_2 = sol.twoSum2(nums2, target2)
-    res3_1 = sol.twoSum1(nums3, target3)
-    res3_2 = sol.twoSum2(nums3, target3)
-    print('case1:', res1_1, res1_2)
-    print('case2:', res2_1, res2_2)
-    print('case3:', res3_1, res3_2)
+    res1 = sol.twoSum1(nums1, target1), sol.twoSum2(nums1, target1)
+    res2 = sol.twoSum1(nums2, target2), sol.twoSum2(nums2, target2)
+    res3 = sol.twoSum1(nums3, target3), sol.twoSum2(nums3, target3)
+    print('case1:', res1)
+    print('case2:', res2)
+    print('case3:', res3)

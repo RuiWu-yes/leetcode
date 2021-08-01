@@ -25,6 +25,7 @@ class Solution:
     def isMatch1(self, s: str, p: str) -> bool:
         # 动态规划
         # dp[i][j]的定义：s[:i] 与 p[:j] 能否匹配
+        # i(s, 行), j(p, 列)
         m, n = len(s), len(p)
         def matches(i: int, j: int) -> bool:
             # i, j状态时，是否匹配
@@ -37,7 +38,7 @@ class Solution:
         # 状态初始化
         dp[0][0] = True  # 表示s和p都为空的时候，可以匹配
         for i in range(m + 1):
-            for j in range(1, n + 1):
+            for j in range(1, n + 1):  # j为什么从1开始，是因为要保证j - 1 >= 0
                 if p[j - 1] == '*':  # 出现'*'说明前面一定有字符，因此总是两个字符(比如：s*)出现
                     if matches(i, j - 1):
                         dp[i][j] |= dp[i - 1][j]  # '*'匹配至少 1 次, 需要看一下(s)i-1的状态

@@ -21,14 +21,14 @@ class Solution:
                 # 叠加到 res 上
                 sum = mul + res[p2]
                 res[p2] = sum % 10
-                res[p1] += sum // 10
+                res[p1] += sum // 10  # 进位
         # 将计算结果转化成字符串
         string = ''
         for i in range(len(res)):
             if not string and res[i] == 0:  # 结果前缀可能存的 0（未使用的位）
                 continue
             string += str(res[i])
-        return "0" if not string else string
+        return string if string else '0'
 
 
 if __name__ == '__main__':

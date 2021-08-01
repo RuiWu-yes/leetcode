@@ -35,17 +35,17 @@ class Solution:
             p = p.right
         p.right = right
 
-    def traverse(self, root):
+
+if __name__ == '__main__':
+    from libs.list2tree import ListCreateTree
+
+    def traverse(root):
         res = []
         while root:
             if not root: return
             res.append(root.val)
             root = root.right
         return res
-
-
-if __name__ == '__main__':
-    from libs.list2tree import ListCreateTree
 
     # 例如，给定二叉树
     #     1
@@ -70,5 +70,5 @@ if __name__ == '__main__':
     #           6
     sol = Solution()
     sol.flatten(root)
-    res = sol.traverse(root)
+    res = traverse(root)
     print(res)

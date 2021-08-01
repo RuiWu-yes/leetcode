@@ -9,10 +9,27 @@
 #      3) 对每个不是空的桶进行排序；
 #      4) 从不是空的桶里把排好序的数据拼接起来。
 
+# 计数排序与桶排序都是以牺牲空间换时间，虽然很快，但由于可能产生大量的空位置导致内存增大，尤其是计数排序。
+# 桶排序中尽量使每个桶中的元素个数均匀分布最好
+
 
 class Sort:
     def bucketsort(self, nums):
-        pass
+        # 找到最大最小值
+        min_num = min(nums)
+        max_num = max(nums)
+        # 桶的大小
+        bucket_range = (max_num - min_num) / len(nums)
+        # 桶数组
+        count_list = [[] for _ in range(len(nums) + 1)]
+        # 向桶数组填数
+        for i in nums:
+            count_list[int((i - min_num) // bucket_range)].append(i)
+        nums.clear()
+        # 回填，这里桶内部排序直接调用了sorted
+        for i in count_list:
+            for j in sorted(i):
+                nums.append(j)
 
 
 if __name__ == '__main__':

@@ -39,6 +39,21 @@ class Solution:
             return left if left_count > right_count else right
         return majority_element_rec(0, len(nums)-1)
 
+    def majorityElement4(self, nums: List[int]) -> int:
+        # 摩尔投票法(时间复杂度：O(N), 空间复杂度：O(1))
+        major = nums[0]
+        count = 1
+        del nums[0]
+        for i in nums:
+            if count == 0:
+                count += 1
+                major = i
+            elif major == i:
+                count += 1
+            else:
+                count -= 1
+        return major
+
 
 if __name__ == '__main__':
     # case1  res = 3
@@ -48,7 +63,7 @@ if __name__ == '__main__':
     nums2 = [2, 2, 1, 1, 1, 2, 2]
 
     sol = Solution()
-    res1 = sol.majorityElement1(nums1), sol.majorityElement2(nums1), sol.majorityElement3(nums1)
-    res2 = sol.majorityElement1(nums2), sol.majorityElement1(nums2), sol.majorityElement1(nums2)
+    res1 = sol.majorityElement1(nums1), sol.majorityElement2(nums1), sol.majorityElement3(nums1), sol.majorityElement4(nums1)
+    res2 = sol.majorityElement1(nums2), sol.majorityElement2(nums2), sol.majorityElement3(nums2), sol.majorityElement4(nums2)
     print('case1:', res1)
     print('case2:', res2)

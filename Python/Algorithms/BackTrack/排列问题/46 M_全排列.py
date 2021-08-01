@@ -21,16 +21,16 @@ class Solution:
     def permute2(self, nums):
         # 回溯算法1
         res = []
-        def backtrack(nums, track):
+        def backtrack(track):
             if len(track) == len(nums):
                 res.append(track[:])
                 return
             for i in range(len(nums)):
                 if nums[i] in track: continue
                 track.append(nums[i])
-                backtrack(nums, track)
+                backtrack(track)
                 track.pop()
-        backtrack(nums, [])
+        backtrack([])
         return res
 
     def permute3(self, nums):
@@ -50,7 +50,7 @@ class Solution:
 
 
 if __name__ == '__main__':
-    # case1
+    # case1  res = [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
     nums = [1, 2, 3]
 
     s = Solution()

@@ -33,11 +33,10 @@ class Solution:
             depth += 1  # 记录最小深度
             for i in range(len(queue)):
                 node = queue.pop(0)
-                if node.left: queue.append(node.left)
-                if node.right: queue.append(node.right)
                 if not node.left and not node.right:  # 当左右孩子都为空的时候，说明是最低点的一层了，退出
                     return depth
-        return depth
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
 
 
 if __name__ == '__main__':

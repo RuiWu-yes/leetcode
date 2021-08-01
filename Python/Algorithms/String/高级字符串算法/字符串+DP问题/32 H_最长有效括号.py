@@ -8,7 +8,7 @@
 class Solution:
     def longestValidParentheses1(self, s: str) -> int:
         # 动态规划
-        # dp[i]的定义: s[:i]的最长有效括号
+        # dp[i]的定义: s[i]为')'时，s[:i]的最长有效括号
         # 状态转移：
         #   1. 当 s[i] 为 '(', dp[i] 必然等于 0，因为不可能组成有效的括号；
         #   2. 那么 s[i] 为 ')'
@@ -42,12 +42,12 @@ class Solution:
         # 使用栈
         if not s: return 0
         res = 0
-        stack = [-1]
+        stack = [-1]  # 栈记录的是索引
         for i in range(len(s)):
             if s[i] == "(":
                 stack.append(i)
             else:
-                stack.pop()
+                stack.pop()  # 碰到")"就将栈中末尾元素弹出
                 if not stack:
                     stack.append(i)
                 else:

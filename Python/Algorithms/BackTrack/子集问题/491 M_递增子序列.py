@@ -14,9 +14,9 @@ class Solution:
                 res.append(track[:])
             map = {}
             for i in range(start, len(nums)):
-                if map.get(nums[i], 0):  # 同一层元素不能重复选择
+                if map.get(nums[i], 0):  # 由于数组可能含有重复数字且返回的结果不能重复，因此同一层做选择的时候不能重复选择一样的数
                     continue
-                if track and nums[i] >= track[-1] or not track:
+                if not track or (track and nums[i] >= track[-1]):  # or(前半部分: 路径为空; 后半部分: 判断递增子序列的条件)
                     track.append(nums[i])
                     map[nums[i]] = 1  # 1代表有, 0代表没有
                     backtrack(i+1, track)

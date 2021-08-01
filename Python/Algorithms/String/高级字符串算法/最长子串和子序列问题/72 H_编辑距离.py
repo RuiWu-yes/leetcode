@@ -57,7 +57,7 @@ class Solution:
             dp[i][0] = i
         for j in range(1, n+1):
             dp[0][j] = j
-        # 自底向上求解
+        # 从上到下，从左到右求解
         for i in range(1, m+1):
             for j in range(1, n+1):
                 if word1[i-1] == word2[j-1]:  # 啥都不做

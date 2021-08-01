@@ -10,7 +10,7 @@ from typing import List
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        # 二分法
+        # 二分法(把二维矩阵想象成一维升序数组)
         m, n = len(matrix), len(matrix[0])
         if m == 0: return False
         left, right = 0, m * n - 1

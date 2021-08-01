@@ -50,6 +50,7 @@ class Solution:
 
     def minDistance3(self, word1: str, word2: str) -> int:
         # 动态规划：DP table
+        # dp[i][j]的定义: dp[i][j] 代表 word1 到 i 位置转换成 word2 到 j 位置需要最少步数
         m, n = len(word1), len(word2)
         # DP table初始化
         dp = [[0]*(n+1) for _ in range(m+1)]

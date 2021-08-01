@@ -17,24 +17,32 @@ class TreeNode:
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode'):
+        # 递归法
         # base case
         if not root: return
-        if root == p or root == q: return root
-
-        left = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
-        # 情况一: 如果 p 和 q 都在以 root 为根的树中，那么 left 和 right 一定分别是 p 和 q（从 base case 看出来的）。
+        if root == p or root == q:
+            return root
+        left = self.lowestCommonAncestor(root.left, p, q)    # 左
+        right = self.lowestCommonAncestor(root.right, p, q)  # 右
+        # 情况一: 如果 p 和 q 都在以 root 为根的树中，那么 left 和 right 一定分别是 p 和 q（从 base case 看出来的）
         if left and right: return root
-        # 情况二: 如果 p 和 q 都不在以 root 为根的树中，直接返回 null。
+        # 情况二: 如果 p 和 q 都不在以 root 为根的树中，直接返回 None
         if not left and not right: return
-        # 情况三: 如果 p 和 q 只有一个存在于 root 为根的树中，函数返回该节点。
-        return right if not left else left
+        # 情况三: 如果 p 和 q 只有一个存在于 root 为根的树中，函数返回该节点
+        return left if left else right
 
 
 if __name__ == '__main__':
     from libs.list2tree import ListCreateTree
 
     # case1  res = 3
+    # 	      3
+    # 	    /   \
+    # 	   5     1
+    # 	  / \   / \
+    # 	 6   2 0   8
+    #       / \
+    #      7   4
     list = [3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]
     Tree = ListCreateTree()
     root = Tree.lct(None, list, 0)

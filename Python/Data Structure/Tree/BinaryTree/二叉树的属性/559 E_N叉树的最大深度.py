@@ -14,12 +14,12 @@ class Node:
         self.children = children
 
 class Solution:
-    def maxDepth1(self, root: 'Node') -> int:
+    def maxDepth(self, root: 'Node') -> int:
         # 递归法
         if not root: return 0
         depth = 0
-        for i in range(len(root.children)):
-            depth = max(depth, self.maxDepth1(root.children[i]))
+        for child in root.children:
+            depth = max(depth, self.maxDepth(child))
         return depth + 1
 
     def maxDepth2(self, root: 'Node') -> int:
@@ -30,9 +30,8 @@ class Solution:
         depth = 0
         while queue:
             depth += 1
-            for i in range(len(queue)):
+            for _ in range(len(queue)):
                 node = queue.pop(0)
-                for j in range(len(node.children)):
-                    if node.children[j]:
-                        queue.append(node.children[j])
+                for child in node.children:
+                    queue.append(child)
         return depth

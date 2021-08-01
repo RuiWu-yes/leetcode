@@ -16,6 +16,7 @@ class Solution:
         while left < right:
             if height[left] < height[right]:
                 res = max(res, height[left] * (right - left))
+                # 哪边短，就移动哪边。因为这么移动虽然宽度在缩小，但是有可能遇到的较长的高，此时面积会大于之前的最大面积
                 left += 1
             else:
                 res = max(res, height[right] * (right - left))

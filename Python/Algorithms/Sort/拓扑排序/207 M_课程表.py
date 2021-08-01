@@ -30,6 +30,25 @@ class Solution:
                 if not indegrees[cur]: queue.append(cur)
         return not numCourses
 
+    def canFinish1(self, numCourses: int, prerequisites) -> bool:
+        edges = {i: [] for i in range(numCourses)}
+        degrees = [0 for i in range(numCourses)]
+        for i, j in prerequisites: # 先修 j 才能修 i
+            edges[j].append(i)
+            degrees[i] += 1
+        queue, count = [], 0
+        for i in range(numCourses):
+            if degrees[i] == 0:
+                queue.append(i)
+        while queue:
+            node = queue.pop(0)
+            count += 1
+            for x in edges[node]:
+                degrees[x] -= 1
+                if degrees[x] == 0:
+                    queue.append(x)
+        return count == numCourses
+
 
 if __name__ == '__main__':
     # case1  res = true
@@ -40,7 +59,7 @@ if __name__ == '__main__':
     # 解释: 总共有 2 门课程。学习课程 1 之前，你需要先完成 课程 0；并且学习课程 0 之前，你还应先完成课程 1。这是不可能的。
     numCourses2, prerequisites2 = 2, [[1, 0], [0, 1]]
     sol = Solution()
-    res1 = sol.canFinish(numCourses1, prerequisites1)
-    res2 = sol.canFinish(numCourses2, prerequisites2)
+    res1 = sol.canFinish(numCourses1, prerequisites1), sol.canFinish1(numCourses1, prerequisites1)
+    res2 = sol.canFinish(numCourses2, prerequisites2), sol.canFinish1(numCourses2, prerequisites2)
     print('case1:', res1)
     print('case2:', res2)

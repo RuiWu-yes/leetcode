@@ -11,12 +11,13 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         # 栈(先入后出)
+        # 例子："[" 和 "]"
         dic = {')': '(', ']': '[', '}': '{'}
         stack = []
         for c in s:
             if c not in dic:
                 stack.append(c)
-            elif not stack or dic[c] != stack.pop():
+            elif stack and dic[c] != stack.pop():  # 如果没有not stack, 例子："]"会报错。因为stack为空时候不能pop
                 return False
         return not stack
 
@@ -29,10 +30,10 @@ if __name__ == '__main__':
     s2 = "()[]{}"
 
     # case3  res = false
-    s3 = "(]"
+    s3 = "["
 
     # case4  res = false
-    s4 = "([)]"
+    s4 = "]"
 
     # case5  res = true
     s5 = "{[]}"

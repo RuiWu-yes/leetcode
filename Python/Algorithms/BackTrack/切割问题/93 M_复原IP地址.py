@@ -22,11 +22,12 @@ class Solution:
                     res.append('.'.join(track[:]))
                 return
             # 遍历下一个ip是几位
-            for end in range(start, min(start + 3, n)):
-                # 如果超过1位但是第一位是0，那么非法
-                if s[start] == '0' and end > start:
+            for end in range(start, min(start + 3, n)):  # min(start+3, n) 末尾的时候，可能够不到+3，就到了结尾
+                # 剪枝
+                # 1) 如果超过1位但是第一位是0，那么非法
+                if s[start] == '0' and end > start:  # end > start说明s[start:end+1]长度超过1
                     return
-                # ip必须小于等于255
+                # 2) ip必须小于等于255
                 if int(s[start: end+1]) > 255:
                     return
                 track.append(s[start: end+1])

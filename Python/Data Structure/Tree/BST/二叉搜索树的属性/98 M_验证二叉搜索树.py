@@ -22,6 +22,8 @@ class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         # 限定以 root 为根的子树节点必须满足 max.val > root.val > min.val
         def validBST(root, leftNode, rightNode):
+            # root: 左/右子树的根节点
+            # leftNode/rightNode: 非None代表root的父节点, left代表root的根在root的左边, right代表root的根在root的右边
             # base case
             if not root: return True
             # 若 root.val 不符合 max 和 min 的限制，说明不是合法 BST

@@ -41,7 +41,11 @@ class Solution:
         connectTwoNode(root.left, root.right)
         return root
 
-    def traverse(self, root):
+
+if __name__ == '__main__':
+    from libs.list2tree import ListCreateTree
+
+    def traverse(root):
         res = []
         deque = collections.deque([root])
         while deque:
@@ -54,10 +58,6 @@ class Solution:
                 deque.append(node.right)
         return res
 
-
-if __name__ == '__main__':
-    from libs.list2tree import ListCreateTree
-
     # case1  输出：[1, #, 2, 3, #, 4, 5, 6, 7, #]
     # 解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，
     #      如图 B 所示。序列化的输出按层序遍历排列，同一层节点由 next 指针连接，'#' 标志着每一层的结束。
@@ -67,5 +67,5 @@ if __name__ == '__main__':
 
     sol = Solution()
     root = sol.connect(root)
-    res = sol.traverse(root)
+    res = traverse(root)
     print(res)

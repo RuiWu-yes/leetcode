@@ -30,3 +30,9 @@ if __name__ == '__main__':
 
     # case2  res = false
     num2 = 14
+
+    sol = Solution()
+    res1 = sol.isPerfectSquare(num1)
+    res2 = sol.isPerfectSquare(num2)
+    print('case1:', res1)
+    print('case2:', res2)

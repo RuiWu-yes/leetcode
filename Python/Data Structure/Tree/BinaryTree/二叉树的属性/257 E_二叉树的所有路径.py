@@ -21,18 +21,17 @@ class Solution:
         if not root: return []
         res = []
         def traversal(cur, path):
-            path += str(cur.val)  # 根
             # 递归终止条件：左右节点都为空(到达叶子节点)
             if not cur.left and not cur.right:
                 res.append(path)
                 return
-            if cur.left: traversal(cur.left, path + "->")  # 左
-            if cur.right: traversal(cur.right, path + "->")  # 右
-        traversal(root, "")
+            if cur.left: traversal(cur.left, path + "->" + str(cur.left.val))  # 左
+            if cur.right: traversal(cur.right, path + "->" + str(cur.right.val))  # 右
+        traversal(root, str(root.val))
         return res
 
     def binaryTreePaths2(self, root: TreeNode) -> List[str]:
-        # 迭代法
+        # 迭代法(使用栈去模拟递归)
         if not root: return []
         res = []
         stack = [[root, str(root.val)]]

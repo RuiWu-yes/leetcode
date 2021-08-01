@@ -15,7 +15,8 @@ class ListNode:
 class Solution:
     def reverseList1(self, head: ListNode) -> ListNode:
         # 递归
-        if not head.next: return head
+        if not head or not head.next:
+            return head
         last = self.reverseList1(head.next)
         head.next.next = head
         head.next = None
@@ -23,6 +24,8 @@ class Solution:
 
     def reverseList2(self, head: ListNode) -> ListNode:
         # 迭代
+        if not head or not head.next:
+            return head
         pre, cur = None, head
         while cur:
             nxt = cur.next

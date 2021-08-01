@@ -21,7 +21,7 @@ class Solution:
 
 
 if __name__ == '__main__':
-    # case1
+    # case1  res = [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
     nums = [1, 2, 3]
 
     s = Solution()

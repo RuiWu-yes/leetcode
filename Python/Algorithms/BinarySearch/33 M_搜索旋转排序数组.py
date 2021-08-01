@@ -28,7 +28,7 @@ class Solution:
 if __name__ == '__main__':
     # case1  res = 4
     nums1 = [4, 5, 6, 7, 0, 1, 2]
-    target1 = 0
+    target1 = 4
 
     # case2  res = -1
     nums2 = [4, 5, 6, 7, 0, 1, 2]

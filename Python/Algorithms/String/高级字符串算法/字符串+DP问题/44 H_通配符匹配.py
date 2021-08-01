@@ -14,6 +14,15 @@ class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         # 动态规划
         # dp[i][j]的定义:【p从0位置到i位置】这一整段，是否能与【s从0位置到j位置】这一整段匹配
+        # i(p, 行), j(s, 列)
+        # 比如:
+        # 0代表False, 1代表True
+        #       '' a d c e b
+        #    ''  1 0 0 0 0 0
+        #     a  0 1 0 0 0 0
+        #     *  0 1 1 1 1 1
+        #     e  0 0 0 0 1 0
+        #     ?  0 0 0 0 0 1
         m, n = len(p), len(s)
         dp = [[False] * (n + 1) for _ in range(m + 1)]
         dp[0][0] = True
